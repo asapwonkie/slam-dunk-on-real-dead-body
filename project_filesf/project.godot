@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="slam-dunk-on-real-dead-body"
-run/main_scene="res://scenes/viewports.tscn"
+run/main_scene="res://scenes/Viewports.tscn"
 config/icon="res://icon.png"
 
 [input]

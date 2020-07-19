@@ -8,16 +8,23 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Component",
+"language": "GDScript",
+"path": "res://scripts/Component.gd"
+}, {
+"base": "Node",
+"class": "GameObject",
+"language": "GDScript",
+"path": "res://scripts/GameObject.gd"
+} ]
 _global_script_class_icons={
-
+"Component": "",
+"GameObject": ""
 }
 
 [application]
 
 config/name="slam-dunk-on-real-dead-body"
 config/icon="res://icon.png"
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/motel.png-938f24b08f28bc8547995ed9dee1ee7b.stex"
+path="res://.import/motel.png-611bd2f8d361b5671daa06bfc5d1837c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://concept art/motel.png"
-dest_files=[ "res://.import/motel.png-938f24b08f28bc8547995ed9dee1ee7b.stex" ]
+source_file="res://concept_art/motel.png"
+dest_files=[ "res://.import/motel.png-611bd2f8d361b5671daa06bfc5d1837c.stex" ]
 
 [params]
 

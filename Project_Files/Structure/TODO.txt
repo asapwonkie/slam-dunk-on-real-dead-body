@@ -1,5 +1,5 @@
 TODO:
-  1) Set up coding structure (GameObject and Component).
+  1) DONE - Set up coding structure (GameObject and Component)
   2) Debug console
   3) Set up test map
   4) Create player movement

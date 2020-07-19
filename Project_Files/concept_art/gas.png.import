@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gas.png-65c1edd5b9c5eb9576cff7130157e711.stex"
+path="res://.import/gas.png-260070ac5ba3eb865b2248f5e6d8cbf4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://concept art/gas.png"
-dest_files=[ "res://.import/gas.png-65c1edd5b9c5eb9576cff7130157e711.stex" ]
+source_file="res://concept_art/gas.png"
+dest_files=[ "res://.import/gas.png-260070ac5ba3eb865b2248f5e6d8cbf4.stex" ]
 
 [params]
 

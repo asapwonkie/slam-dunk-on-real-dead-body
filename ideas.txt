@@ -1,0 +1,40 @@
+Titles:
+    Slam Dunk On Real Dead Body
+    Fucker Over of the Deceased
+
+Story:
+    There's a light on in the window of a rickety motel. The light clicks off and a man walks out and down the motel steps to his car, then keys the ignition.
+    The player then gets control of the car. He pulls out of the parking lot and drives down the road.
+    The road is empty, no other drivers can be seen. The gas meter on the car is close to empty. Eventually, a gas station appears on the side of the road.
+    The player pulls into the gas station parking lot in order to refuel. Player loses direct control of the car/character, automated park, and scene transition to inside the gas station.
+    Player talks to the clerk of the station:
+
+        Chap enters the chat.
+        Texas enters the chat.
+
+        Chap: "Got any gas?" (*raspily*)
+        Texas: "Depends. How much are you willing to pay for it?"
+        Chap: "All I got is 5 dollars."
+        Texas: "Alright bet. Where ya headed?"
+        Chap: "Somewhere far, far away from this goddamn town."
+        Texas: "Cringe bro. Well you won't make it far if you're strapped for cash."
+        Chap: "Fuck."
+        Texas: "Tell ya what: I've got a lucrative proposition that might help ya out."
+        Chap: "Bet. What's good?"
+        Texas: "There's a cemetery up the road that some say hold untold riches. Here's a shovel and an obituary from 1947."
+        Texas: "I've highlighted the names of the deceased known to come from wealthy families."
+        Chap: "You're a fucking freak, bro. Give me some gas so I can get the fuck out of here."
+        Texas: "Don't be such a negative Nancy. I will crush your skull between my thighs."
+        Texas: "What'd you want?" --> Shop menu opens. Take shovel, list, and gas.
+        Chap: "What's in it for you anyways?"
+        Texas: "Well I'm gonna get my cut, of course."
+        Chap: "Damn."
+
+        Chap has left the chat.
+
+    Player drives car down road, comes across cemetery, smashes the gate with his car and gets out. A popup appears, prompting the player to hit F to read the obituary list.
+
+Soundtrack:
+    Utica Quarry, Nighttime - Slint (Graveyard)
+    Wngs - Knxwledge (Gas Station)
+    RIP ft. Bun B - Childish Gambino (Driving) or Resonance - Home

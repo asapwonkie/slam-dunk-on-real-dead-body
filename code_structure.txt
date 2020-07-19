@@ -1,0 +1,8 @@
+Structure:
+    GameObject - An empty container that holds children. Node with no properties, except maybe for a name identifier. Contains methods for component referencing.
+    Component - Any data or scripts that are children (don't have to be direct children) of a GameObject.
+
+Philosophy:
+    Any behavior/component (say breathing fire) can be attached as a child to a GameObject so that GameObject then has that new behavior.
+    Separates all behaviors from each other.
+    Behavior scripts utilize GameObject component referencing logic to generically identify/reference the components required for the behavior to function.

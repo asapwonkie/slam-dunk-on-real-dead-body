@@ -1,6 +1,6 @@
 TODO:
   1) DONE - Set up coding structure (GameObject and Component)
-  2) Debug console
+  2) DONE - Debug console
   3) Set up test map
   4) Create player movement
   5) Create UI --> adding powerup/weapon and cash indicators, health

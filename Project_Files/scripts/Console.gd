@@ -4,9 +4,10 @@ var commands_list = { "quit" : funcref(self, "quit"),
 					  "help" : funcref(self, "help") }
 
 var entered_commands = Array()
-var open = true
+var open = false
 
 func _ready():
+	open = true
 	toggle_console()
 	$OutputField.clear()
 
@@ -14,6 +15,7 @@ func _input(event):
 	if event.is_action_pressed("OpenConsole"):
 		event.unicode = SPKEY # so nothing is input to $InputField
 		toggle_console()
+		print(open)
 	elif open and event.is_action_pressed("Enter"):
 		enter_command($InputField.text)
 		

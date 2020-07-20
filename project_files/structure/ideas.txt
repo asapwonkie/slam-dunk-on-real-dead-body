@@ -9,6 +9,8 @@ Story:
     The player pulls into the gas station parking lot in order to refuel. Player loses direct control of the car/character, automated park, and scene transition to inside the gas station.
     Player talks to the clerk of the station:
 
+	(Texas hits his juul after every line of dialogue.)
+
         Chap enters the chat.
         Texas enters the chat.
 
@@ -38,3 +40,17 @@ Soundtrack:
     Utica Quarry, Nighttime - Slint (Graveyard)
     Wngs - Knxwledge (Gas Station)
     RIP ft. Bun B - Childish Gambino (Driving) or Resonance - Home
+
+
+-first grave has names of us.
+-if you run out of gas on the road, you can get out of your car and go back/forward to a gas station but there are resurrected zombies on the road that you must avoid.
+-if you hit a zombie on the road, some gas leaks out so you must dodge.
+-some zombies on the road have keys to locked caskets (or maybe somehow give you upgrades on your car)
+-last name on list is a boss, he turns into a demon that has extra money if you defeat him.
+-list names with occupation so you decide what they'll be buried with. based on the occupation there's a probability of what they'll have. (police officer: 50% have pistol, doctor: 25% have medical supplies)
+-dashes allow you to either dodge through a zombie without getting hurt or dodge across a gravestone to another path.
+-guns have different accuracies, you'll always hit when the zombies are close
+-maybe flashlight stuns zombies when its pointed at them.
+-maybe place traps.
+-flashlight has battery that runs down over time. can buy new ones at gas station.
+-can put down a flashlight on the ground to illuminate a path

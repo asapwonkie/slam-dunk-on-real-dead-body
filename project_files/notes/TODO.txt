@@ -19,3 +19,4 @@ TODO:
   13) Implement driving/zombie smashing as a loading screen
   14) Create Gas Station/Implement selling/buying system
   15) Create introductory sequence/dialogue
+  16) Function that asserts and prints error

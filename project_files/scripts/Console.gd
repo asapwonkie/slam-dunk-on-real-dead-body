@@ -15,7 +15,6 @@ func _input(event):
 	if event.is_action_pressed("OpenConsole"):
 		event.unicode = SPKEY # so nothing is input to $InputField
 		toggle_console()
-		print(open)
 	elif open and event.is_action_pressed("Enter"):
 		enter_command($InputField.text)
 		

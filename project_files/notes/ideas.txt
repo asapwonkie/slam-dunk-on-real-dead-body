@@ -55,3 +55,4 @@ Soundtrack:
 -maybe place traps.
 -flashlight has battery that runs down over time. can buy new ones at gas station.
 -can put down a flashlight on the ground to illuminate a path
+-pet cemetery with dogs

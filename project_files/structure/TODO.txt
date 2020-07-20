@@ -1,15 +1,21 @@
 TODO:
   1) DONE - Set up coding structure (GameObject and Component)
   2) DONE - Debug console
-  3) Set up test map
-  4) Create player movement
-  5) Create UI --> adding powerup/weapon and cash indicators, health
-  6) Create/Implement Obituary List from 1947
-  7) Implement flashlight reading of gravestones
-  8) Dig Gravestones/Pull Casket
-  9) Implement Ghosts and Zombies
-  10) Implement combat
-  11) Implement map generation
-  12) Implement driving/zombie smashing as a loading screen
-  13) Create Gas Station/Implement selling/buying system
-  14) Create introductory sequence/dialogue
+  3) Set up tilemaps for map generation
+	DONE - Player Path Tile --> Green
+        DONE - Grave Tile --> Red
+        DONE - Gate Tile --> Blue
+        DONE - Coffin Space Tile --> Brown
+        All tiles will be 16 x 16 for the prototype
+  4) Set up test map/prototype generation --> make placeholder art for map tiles
+  5) Create player movement
+  6) Create UI --> adding powerup/weapon and cash indicators, health
+  7) Create/Implement Obituary List from 1947
+  8) Implement flashlight reading of gravestones
+  9) Dig Gravestones/Pull Casket
+  10) Implement Ghosts and Zombies
+  11) Implement combat
+  12) Implement map generation
+  13) Implement driving/zombie smashing as a loading screen
+  14) Create Gas Station/Implement selling/buying system
+  15) Create introductory sequence/dialogue

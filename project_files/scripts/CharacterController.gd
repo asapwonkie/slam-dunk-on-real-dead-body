@@ -7,9 +7,9 @@ extends Component
 
 
 
-export(int) var walk_speed = 70
+export(int) var walk_speed = 200
 export(int) var stunned_speed = 125
-export(int) var dash_speed = 200
+export(int) var dash_speed = 500
 
 export(float) var stunned_time = 0.3
 export(float) var dash_time = 0.3
@@ -116,9 +116,10 @@ func can_dash():
 
 
 func dash():
-	dash_direction = walk_direction
-	dash_timer.start()
-	dash_recover_timer.start()
+	if can_dash():
+		dash_direction = walk_direction
+		dash_timer.start()
+		dash_recover_timer.start()
 
 
 

@@ -7,11 +7,11 @@ extends Component
 
 
 
-export(String) var left_action = "ui_left"
-export(String) var right_action = "ui_right"
-export(String) var up_action = "ui_up"
-export(String) var down_action = "ui_down"
-export(String) var dash_action = "dash"
+export(String) var left_action = "Left"
+export(String) var right_action = "Right"
+export(String) var up_action = "Up"
+export(String) var down_action = "Down"
+export(String) var dash_action = "Dash"
 export(String) var attack_action = "a"
 
 

@@ -28,6 +28,7 @@ texture = ExtResource( 2 )
 script = ExtResource( 3 )
 transform_holder_leader_path = NodePath("../KinematicBody2D")
 transform_holder_follower_path_1 = NodePath("../Sprite")
+transform_holder_follower_path_2 = null
 couple_origin_x = true
 couple_origin_y = true
 couple_rotation = true

@@ -42,11 +42,11 @@ func _ready():
 
 func _process(_delta):
 	if Engine.editor_hint:
-		if transform_holder_leader_path != "":
+		if transform_holder_leader_path != null:
 			transform_holder_leader = get_node(transform_holder_leader_path)
-		if transform_holder_follower_path_1 != "":
+		if transform_holder_follower_path_1 != null:
 			transform_holder_followers[0] = get_node(transform_holder_follower_path_1)
-		if transform_holder_follower_path_2 != "":
+		if transform_holder_follower_path_2 != null:
 			transform_holder_followers[1] = get_node(transform_holder_follower_path_2)
 	
 	for i in range(transform_holder_followers.size()):

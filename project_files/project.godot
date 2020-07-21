@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Component",
+"class": "Area2DHurtPlayerOnTouch",
+"language": "GDScript",
+"path": "res://scripts/Area2DHurtPlayerOnTouch.gd"
+}, {
+"base": "Component",
+"class": "CharacterController",
+"language": "GDScript",
+"path": "res://scripts/CharacterController.gd"
+}, {
 "base": "Node",
 "class": "Component",
 "language": "GDScript",
@@ -18,10 +28,42 @@ _global_script_classes=[ {
 "class": "GameObject",
 "language": "GDScript",
 "path": "res://scripts/GameObject.gd"
+}, {
+"base": "Component",
+"class": "Health",
+"language": "GDScript",
+"path": "res://scripts/Health.gd"
+}, {
+"base": "Component",
+"class": "PlayerAnimation",
+"language": "GDScript",
+"path": "res://scripts/PlayerAnimation.gd"
+}, {
+"base": "Component",
+"class": "PlayerInput",
+"language": "GDScript",
+"path": "res://scripts/PlayerInput.gd"
+}, {
+"base": "Component",
+"class": "RandomMovement",
+"language": "GDScript",
+"path": "res://scripts/RandomMovement.gd"
+}, {
+"base": "Component",
+"class": "TransformCoupling",
+"language": "GDScript",
+"path": "res://scripts/TransformCoupling.gd"
 } ]
 _global_script_class_icons={
+"Area2DHurtPlayerOnTouch": "",
+"CharacterController": "",
 "Component": "",
-"GameObject": ""
+"GameObject": "",
+"Health": "",
+"PlayerAnimation": "",
+"PlayerInput": "",
+"RandomMovement": "",
+"TransformCoupling": ""
 }
 
 [application]

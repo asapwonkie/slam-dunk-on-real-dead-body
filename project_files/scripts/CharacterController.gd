@@ -17,8 +17,8 @@ export(float) var dash_recover_time = 0.5
 
 
 
-var walk_direction = Vector2.ZERO
-var dash_direction = Vector2.ZERO
+var facing_direction = Vector2.ZERO
+var walking = false
 var knock_back_direction = Vector2.ZERO
 
 
@@ -60,25 +60,30 @@ func _process(_delta):
 
 
 func _physics_process(_delta):
-	kinematic_body2D.move_and_slide(get_move_direction())
+	kinematic_body2D.move_and_slide(get_move_velocity())
 
 
 
-func get_move_direction():
-	if !dash_timer.is_stopped():
-		return dash_direction * dash_speed
-	elif !stunned_timer.is_stopped():
+func get_move_velocity():
+	if !stunned_timer.is_stopped():
 		return knock_back_direction * stunned_speed
 	else:
-		return walk_direction * walk_speed
-
-
-
-func get_facing_direction():
-	if !dash_timer.is_stopped():
-		return dash_direction
-	else:
-		return walk_direction
+		var move_direction = facing_direction
+		
+		# if there is a barrier north of you and you are moving up and to the left, just move left
+		if move_direction.x != 0 and move_direction.y != 0 and kinematic_body2D.test_move(kinematic_body2D.transform, move_direction):
+			move_direction = move_direction / Vector2(abs(move_direction.x), abs(move_direction.y))
+			if !kinematic_body2D.test_move(kinematic_body2D.transform, Vector2(move_direction.x, 0)):
+				move_direction.y = 0
+			elif !kinematic_body2D.test_move(kinematic_body2D.transform, Vector2(0, move_direction.y)):
+				move_direction.x = 0
+		
+		if !dash_timer.is_stopped():
+			return move_direction * dash_speed
+		elif walking:
+			return move_direction * walk_speed
+		else:
+			return Vector2.ZERO
 
 
 
@@ -117,11 +122,13 @@ func can_dash():
 
 func dash():
 	if can_dash():
-		dash_direction = walk_direction
 		dash_timer.start()
 		dash_recover_timer.start()
 
 
 
-func set_walk_direction(direction: Vector2):
-	walk_direction = direction.normalized()
+func walk(direction: Vector2):
+	walking = false
+	if direction != Vector2.ZERO and !is_dashing():
+		walking = true
+		facing_direction = direction.normalized()

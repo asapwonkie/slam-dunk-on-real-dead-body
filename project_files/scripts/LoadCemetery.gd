@@ -36,7 +36,7 @@ func load_objects():
 				grave_transform = Transform2D(0, tile_map.map_to_world(pos + Vector2(3, 6)))
 				grave_transform.x = Vector2(-1, 0)
 				grave_transform.y = Vector2(0, -1)
-			grave.get_child_of_type(StaticBody2D).transform = grave_transform
+			grave.get_child_of_type(Sprite).transform = grave_transform
 			
 			game_object.call_deferred("add_child", grave)
 		elif tile_name == "grave_right":
@@ -51,6 +51,6 @@ func load_objects():
 				grave_transform = Transform2D(0, tile_map.map_to_world(pos + Vector2(0, 3)))
 				grave_transform.x = Vector2(0, -1)
 				grave_transform.y = Vector2(1, 0)
-			grave.get_child_of_type(StaticBody2D).transform = grave_transform
+			grave.get_child_of_type(Sprite).transform = grave_transform
 			
 			game_object.call_deferred("add_child", grave)

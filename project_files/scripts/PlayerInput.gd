@@ -21,7 +21,7 @@ onready var character_controller = game_object.get_child_of_type(CharacterContro
 
 
 func _process(_delta):
-	character_controller.set_walk_direction(
+	character_controller.walk(
 			Vector2( -int(Input.is_action_pressed(left_action)) +
 					  int(Input.is_action_pressed(right_action)),
 					 -int(Input.is_action_pressed(up_action)) +

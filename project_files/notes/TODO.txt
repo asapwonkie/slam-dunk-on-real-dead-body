@@ -7,8 +7,8 @@ TODO:
         DONE - Gate Tile --> Blue
         DONE - Coffin Space Tile --> Brown
         All tiles will be 16 x 16 for the prototype
-  4) Set up test map/prototype generation --> make placeholder art for map tiles
-  5) Create player movement
+  4) DONE - Set up test map/prototype generation --> make placeholder art for map tiles
+  5) DONE - Create player movement
   6) Create UI --> adding powerup/weapon and cash indicators, health
   7) Create/Implement Obituary List from 1947
   8) Implement flashlight reading of gravestones

@@ -10,9 +10,12 @@
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="Player" index="1"]
-position = Vector2( 500, 664 )
+position = Vector2( 528, 680 )
 
 [node name="KinematicBody2D" parent="Player" index="2"]
-position = Vector2( 500, 664 )
+position = Vector2( 528, 680 )
+
+[node name="Area2D" parent="Player" index="3"]
+position = Vector2( 528, 680 )
 
 [editable path="Player"]

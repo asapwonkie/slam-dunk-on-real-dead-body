@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://tile_art/cemetery_tiles_prototype.png" type="Texture" id=1]
 [ext_resource path="res://scripts/GameObject.gd" type="Script" id=2]
+[ext_resource path="res://concept_art/player.png" type="Texture" id=3]
 [ext_resource path="res://scripts/TransformCoupling.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -25,6 +26,11 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 24, 96 )
 shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+position = Vector2( 24.1395, 95.8447 )
+scale = Vector2( 0.75474, 0.494616 )
+texture = ExtResource( 3 )
 
 [node name="TransformCoupling" type="Node" parent="."]
 script = ExtResource( 4 )

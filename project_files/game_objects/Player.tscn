@@ -13,7 +13,7 @@
 extents = Vector2( 16, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4, 4 )
+extents = Vector2( 16.1396, 4 )
 
 [node name="Player" type="Node"]
 script = ExtResource( 6 )

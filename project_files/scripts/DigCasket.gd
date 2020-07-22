@@ -18,6 +18,11 @@ func dig():
 	
 	if overlapping_areas.size() == 1:
 		var grave = overlapping_areas[0].get_parent()
-		var map_pos = cemetery_tile_map.world_to_map(grave.get_child_of_type(Sprite).transform.origin)
-		cemetery_tile_map.set_cell(map_pos.x, map_pos.y, -1)
-		print(map_pos)
+		var t = grave.get_child_of_type(Sprite).transform
+		var map_pos = cemetery_tile_map.get_cell_pos(t, Vector2(3, 6))
+		
+		var flip_x = cemetery_tile_map.get_flip_x(t)
+		var flip_y = cemetery_tile_map.get_flip_y(t)
+		var transpose = cemetery_tile_map.get_transposed(t)
+		
+		cemetery_tile_map.set_cell(map_pos.x, map_pos.y, 5, flip_x, flip_y, transpose)

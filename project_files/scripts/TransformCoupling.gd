@@ -6,14 +6,14 @@ extends Component
 
 
 var transform_holder_leader = null
-var transform_holder_followers = [ null, null ]
+var transform_holder_followers = [ null, null, null ]
 
 
 
 export(NodePath) var transform_holder_leader_path = null setget set_transform_holder_leader_path, get_transform_holder_leader_path
 export(NodePath) var transform_holder_follower_path_1 = null setget set_transform_holder_follower_path_1, get_transform_holder_follower_path_1
 export(NodePath) var transform_holder_follower_path_2 = null setget set_transform_holder_follower_path_2, get_transform_holder_follower_path_2
-
+export(NodePath) var transform_holder_follower_path_3 = null setget set_transform_holder_follower_path_3, get_transform_holder_follower_path_3
 
 
 export(bool) var couple_origin_x = false
@@ -28,7 +28,7 @@ export(bool) var couple_y_hat = false
 
 func _ready():
 	assert(transform_holder_leader_path != null)
-	assert(transform_holder_follower_path_1 != null or transform_holder_follower_path_2 != null)
+	assert(transform_holder_follower_path_1 != null or transform_holder_follower_path_2 != null or transform_holder_follower_path_3 != null)
 	
 	transform_holder_leader = get_node(transform_holder_leader_path)
 	
@@ -38,6 +38,8 @@ func _ready():
 	if transform_holder_follower_path_2 != null:
 		transform_holder_followers[1] = get_node(transform_holder_follower_path_2)
 
+	if transform_holder_follower_path_3 != null:
+		transform_holder_followers[2] = get_node(transform_holder_follower_path_3)
 
 
 func _process(_delta):
@@ -48,7 +50,9 @@ func _process(_delta):
 			transform_holder_followers[0] = get_node(transform_holder_follower_path_1)
 		if transform_holder_follower_path_2 != null:
 			transform_holder_followers[1] = get_node(transform_holder_follower_path_2)
-	
+		if transform_holder_follower_path_3 != null:
+			transform_holder_followers[2] = get_node(transform_holder_follower_path_3)
+			
 	for i in range(transform_holder_followers.size()):
 		if transform_holder_followers[i] != null:
 			if couple_origin_x:
@@ -90,3 +94,11 @@ func set_transform_holder_follower_path_2(path: NodePath) -> void:
 	
 func get_transform_holder_follower_path_2() -> NodePath:
 	return transform_holder_follower_path_2
+
+
+
+func set_transform_holder_follower_path_3(path: NodePath) -> void:
+	transform_holder_follower_path_3 = path
+	
+func get_transform_holder_follower_path_3() -> NodePath:
+	return transform_holder_follower_path_3

@@ -9,13 +9,10 @@
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
-[node name="KinematicBody2D" parent="Player" index="1"]
-position = Vector2( 500, 575 )
+[node name="Sprite" parent="Player" index="1"]
+position = Vector2( 500, 664 )
 
-[node name="Sprite" parent="Player" index="2"]
-position = Vector2( 500, 575 )
-
-[node name="TransformCoupling" parent="Player" index="3"]
-transform_holder_follower_path_2 = null
+[node name="KinematicBody2D" parent="Player" index="2"]
+position = Vector2( 500, 664 )
 
 [editable path="Player"]

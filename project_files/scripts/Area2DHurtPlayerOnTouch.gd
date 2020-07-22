@@ -32,12 +32,11 @@ func _physics_process(_delta):
 	var overlapping_areas = area2D.get_overlapping_areas()
 	
 	# no need to loop if we have just 1 player
-	for i in range(overlapping_areas.size()):
-		player_area2D = overlapping_areas[0]
-		player = get_game_object(player_area2D)
-		player_health = player.get_child_of_type(Health)
-		player_character_controller = player.get_child_of_type(CharacterController)
-		
-		player_health.hurt(damage_on_hit)
-		player_character_controller.stun()
-		player_character_controller.knock_back(player_area2D.global_position - area2D.global_position, 1)
+	player_area2D = overlapping_areas[0]
+	player = get_game_object(player_area2D)
+	player_health = player.get_child_of_type(Health)
+	player_character_controller = player.get_child_of_type(CharacterController)
+	
+	player_health.hurt(damage_on_hit)
+	player_character_controller.stun()
+	player_character_controller.knock_back(player_area2D.global_position - area2D.global_position, 1)

@@ -13,7 +13,7 @@ var open = false
 var commands_list = { "quit" : funcref(self, "quit"),
 					  "help" : funcref(self, "help"),
 					  "show_fps" : funcref(self, "show_fps") }
-var args_list = { "quit": 0,
+var nargs_list = { "quit": 0,
 				  "help": 0,
 				  "show_fps": 1 }
 
@@ -56,20 +56,36 @@ func toggle_console():
 func enter_command(command: String) -> void:
 	entered_commands.push_back(command)
 	
+	print_entered_command(command)
 	$InputField.clear()
 	
 	var split = command.split(" ")
 	var f = split[0]
 	var nargs = split.size() - 1
 	
-	if (commands_list.has(f)):
-		$OutputField.add_text(command + "\n")
-		if nargs == 0:
-			commands_list[f].call_func()
-		elif nargs == 1:
-			commands_list[f].call_func(split[1])
+	if commands_list.has(f):
+		if nargs_list[f] == nargs:
+			if nargs == 0:
+				commands_list[f].call_func()
+			elif nargs == 1:
+				commands_list[f].call_func(split[1])
+		else:
+			if nargs_list[f] == 1:
+				print_error(str("Command ", f, " takes 1 argument.\n"))
+			else:
+				print_error(str("Command ", f, " takes ", nargs_list[f], " arguments.\n"))
 	else:
-		$OutputField.add_text(str("Unknown command \"", command, "\"\n"))
+		print_error(str("Unknown command \"", command, "\"\n"))
+
+
+
+func print_entered_command(command):
+	$OutputField.add_text(command + "\n")
+	
+func print_error(message):
+	$OutputField.push_color(Color(255, 255, 255, 255))
+	$OutputField.add_text(message + "\n")
+	$OutputField.pop()
 
 
 
@@ -86,7 +102,7 @@ func help():
 
 
 func show_fps(value):
-	value = int(value)
-	
-	if value == 0 or value == 1:
-		fps_label.visible = value
+	if value == "0" or value == "1":
+		fps_label.visible = int(value)
+	else:
+		print_error("Command show_fps takes a value of 0 or 1.")

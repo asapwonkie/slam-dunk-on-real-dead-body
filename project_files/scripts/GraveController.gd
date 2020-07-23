@@ -4,13 +4,17 @@ extends Component
 
 
 
+const ZOMBIE = preload("res://game_objects/Zombie.tscn")
+
+
+
 onready var transform_holder = game_object.get_child_of_type(TransformHolder)
 
 
 
 var cemetery
 var size = Vector2(48, 96)
-var casket_index = 5
+var casket_index = 4
 
 
 
@@ -29,3 +33,7 @@ func open():
 	var transpose = tile_map.get_transposed(transform_holder.transform)
 	
 	tile_map.set_cell(map_pos.x, map_pos.y, casket_index, flip_x, flip_y, transpose)
+	
+	var zombie = ZOMBIE.instance()
+	zombie.get_child_of_type(KinematicBody2D).transform.origin = tile_map.map_to_world(Vector2(30, 34))
+	cemetery.add_child(zombie)

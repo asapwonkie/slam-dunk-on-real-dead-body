@@ -28,5 +28,5 @@ func _ready():
 func _process(_delta):
 	if timer.is_stopped():
 		var phi = rand_range(0, 2 * PI)
-		character_controller.set_walk_direction(Vector2(cos(phi), sin(phi)))
+		character_controller.walk(Vector2(cos(phi), sin(phi)))
 		timer.start()

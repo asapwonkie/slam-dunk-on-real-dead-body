@@ -1,5 +1,7 @@
-extends Node
+# GameObject.gd
+
 class_name GameObject
+extends Node2D
 
 
 
@@ -50,4 +52,35 @@ func get_children_of_type(child_class):
 	if children_of_type.size() > 0:
 		return children_of_type
 		
+	return null
+
+
+
+func has_child_of_name(child_name):
+	var queue = Array()
+	queue.push_back(self)
+	
+	while !queue.empty():
+		var node = queue.pop_front()
+		if node.name == child_name:
+			return true
+		for child in node.get_children():
+			queue.push_back(child)
+	
+	return false
+
+
+
+func get_child_of_name(child_name):
+	var queue = Array()
+	queue.push_back(self)
+	
+	while !queue.empty():
+		var node = queue.pop_front()
+		if node.name == child_name:
+			return node
+		for child in node.get_children():
+			queue.push_back(child)
+	
+	assert(false)
 	return null

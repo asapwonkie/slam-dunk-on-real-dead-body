@@ -3,39 +3,47 @@
 tool
 
 class_name TransformCoupling
-extends Component
+extends Node
 
 
 
 var transform_holder_leader = null
 var transform_holder_followers = [ null, null, null, null ]
+var offsets = [ null, null, null, null ]
 
 
 
 export(NodePath) var transform_holder_leader_path = NodePath() setget set_transform_holder_leader_path
+
 export(NodePath) var transform_holder_follower_path_0 = NodePath() setget set_transform_holder_follower_path_0
+export(Vector2) var offset_0 = Vector2.ZERO
+
 export(NodePath) var transform_holder_follower_path_1 = NodePath() setget set_transform_holder_follower_path_1
+export(Vector2) var offset_1 = Vector2.ZERO
+
 export(NodePath) var transform_holder_follower_path_2 = NodePath() setget set_transform_holder_follower_path_2
+export(Vector2) var offset_2 = Vector2.ZERO
+
 export(NodePath) var transform_holder_follower_path_3 = NodePath() setget set_transform_holder_follower_path_3
+export(Vector2) var offset_3 = Vector2.ZERO
 
 
-
-export(bool) var couple_origin_x = false
-export(bool) var couple_origin_y = false
-export(bool) var couple_rotation = false # measured CCW from +x axis
-export(bool) var couple_scale_x = false
-export(bool) var couple_scale_y = false
-export(bool) var couple_x_hat = false
-export(bool) var couple_y_hat = false
+export(bool) var couple_origin_x = true
+export(bool) var couple_origin_y = true
+export(bool) var couple_rotation = true # measured CCW from +x axis
+export(bool) var couple_scale_x = true
+export(bool) var couple_scale_y = true
+export(bool) var couple_x_hat = true
+export(bool) var couple_y_hat = true
 
 
 
 func _ready():
-	assert(transform_holder_leader_path != "")
-	assert(transform_holder_follower_path_0 != ""
-		or transform_holder_follower_path_1 != ""
-		or transform_holder_follower_path_2 != ""
-		or transform_holder_follower_path_3 != "")
+#	assert(transform_holder_leader_path != "")
+#	assert(transform_holder_follower_path_0 != ""
+#		or transform_holder_follower_path_1 != ""
+#		or transform_holder_follower_path_2 != ""
+#		or transform_holder_follower_path_3 != "")
 	
 	set_transforms()
 
@@ -44,24 +52,27 @@ func _ready():
 func _process(_delta):
 	if Engine.editor_hint:
 		set_transforms()
+		
+	if transform_holder_leader != null:
+		offsets = [ offset_0, offset_1, offset_2, offset_3 ]
 	
-	for i in range(transform_holder_followers.size()):
-		if transform_holder_followers[i] != null:
-			if couple_origin_x:
-				transform_holder_followers[i].transform.origin.x = transform_holder_leader.transform.origin.x
-			if couple_origin_y:
-				transform_holder_followers[i].transform.origin.y = transform_holder_leader.transform.origin.y
-			if couple_rotation:
-				transform_holder_followers[i].transform.x = transform_holder_followers[i].transform.get_scale().x * Vector2(cos(transform_holder_leader.transform.get_rotation()), sin(transform_holder_leader.transform.get_rotation()))
-				transform_holder_followers[i].transform.y = transform_holder_followers[i].transform.get_scale().y * Vector2(-sin(transform_holder_leader.transform.get_rotation()), cos(transform_holder_leader.transform.get_rotation()))
-			if couple_scale_x:
-				transform_holder_followers[i].transform.x = transform_holder_followers[i].transform.x.normalized() * transform_holder_leader.transform.get_scale().x
-			if couple_scale_y:
-				transform_holder_followers[i].transform.y = transform_holder_followers[i].transform.y.normalized() * transform_holder_leader.transform.get_scale().y
-			if couple_x_hat:
-				transform_holder_followers[i].transform.x = transform_holder_leader.transform.x
-			if couple_y_hat:
-				transform_holder_followers[i].transform.y = transform_holder_leader.transform.y
+		for i in range(transform_holder_followers.size()):
+			if transform_holder_followers[i] != null:
+				if couple_origin_x:
+					transform_holder_followers[i].global_position.x = transform_holder_leader.global_position.x + offsets[i].x
+				if couple_origin_y:
+					transform_holder_followers[i].global_position.y = transform_holder_leader.global_position.y + offsets[i].y
+				if couple_rotation:
+					transform_holder_followers[i].global_transform.x = transform_holder_followers[i].global_scale.x * Vector2(cos(transform_holder_leader.global_rotation), sin(transform_holder_leader.global_rotation))
+					transform_holder_followers[i].global_transform.y = transform_holder_followers[i].global_scale.y * Vector2(-sin(transform_holder_leader.global_rotation), cos(transform_holder_leader.global_rotation))
+				if couple_scale_x:
+					transform_holder_followers[i].global_transform.x = transform_holder_followers[i].global_transform.x.normalized() * transform_holder_leader.global_scale.x
+				if couple_scale_y:
+					transform_holder_followers[i].global_transform.y = transform_holder_followers[i].global_transform.y.normalized() * transform_holder_leader.global_scale.y
+				if couple_x_hat:
+					transform_holder_followers[i].global_transform.x = transform_holder_leader.global_transform.x
+				if couple_y_hat:
+					transform_holder_followers[i].global_transform.y = transform_holder_leader.global_transform.y
 
 
 

@@ -6,7 +6,8 @@
 
 
 
-# Note: Camera must be at the bottom of the scene hierarchy for this to work.
+# Note: Camera must be at the bottom of the scene hierarchy for this to work
+# so that the camera is aligned after its position has been updated by other nodes.
 
 
 

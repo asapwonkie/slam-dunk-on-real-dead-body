@@ -1,26 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tile_art/cemetery_tiles_prototype.png" type="Texture" id=1]
 [ext_resource path="res://scripts/GameObject.gd" type="Script" id=2]
-[ext_resource path="res://scripts/TransformHolder.gd" type="Script" id=3]
-[ext_resource path="res://scripts/TransformCoupling.gd" type="Script" id=4]
 [ext_resource path="res://scripts/GraveController.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 8 )
 
-[node name="Grave" type="Node"]
+[node name="Grave" type="Node2D"]
 script = ExtResource( 2 )
-
-[node name="TransformHolder" type="Node" parent="."]
-script = ExtResource( 3 )
-
-[node name="Sprite" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 1 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 48, 96 )
 
 [node name="Area2D" type="Area2D" parent="."]
 monitoring = false
@@ -31,18 +19,12 @@ collision_mask = 8
 position = Vector2( 24, 96 )
 shape = SubResource( 1 )
 
-[node name="TransformCoupling" type="Node" parent="."]
-script = ExtResource( 4 )
-transform_holder_leader_path = NodePath("../TransformHolder")
-transform_holder_follower_path_0 = NodePath("../Sprite")
-transform_holder_follower_path_1 = NodePath("../Area2D")
-couple_origin_x = true
-couple_origin_y = true
-couple_rotation = true
-couple_scale_x = true
-couple_scale_y = true
-couple_x_hat = true
-couple_y_hat = true
+[node name="Sprite" type="Sprite" parent="Area2D"]
+visible = false
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 48, 96 )
 
 [node name="GraveController" type="Node" parent="."]
 script = ExtResource( 5 )

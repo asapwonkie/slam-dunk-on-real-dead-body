@@ -71,11 +71,11 @@ func get_move_velocity():
 		var move_direction = facing_direction
 		
 		# if there is a barrier north of you and you are moving up and to the left, just move left
-		if move_direction.x != 0 and move_direction.y != 0 and kinematic_body2D.test_move(kinematic_body2D.transform, move_direction):
+		if move_direction.x != 0 and move_direction.y != 0 and kinematic_body2D.test_move(kinematic_body2D.global_transform, move_direction):
 			move_direction = move_direction / Vector2(abs(move_direction.x), abs(move_direction.y))
-			if !kinematic_body2D.test_move(kinematic_body2D.transform, Vector2(move_direction.x, 0)):
+			if !kinematic_body2D.test_move(kinematic_body2D.global_transform, Vector2(move_direction.x, 0)):
 				move_direction.y = 0
-			elif !kinematic_body2D.test_move(kinematic_body2D.transform, Vector2(0, move_direction.y)):
+			elif !kinematic_body2D.test_move(kinematic_body2D.global_transform, Vector2(0, move_direction.y)):
 				move_direction.x = 0
 		
 		if !dash_timer.is_stopped():

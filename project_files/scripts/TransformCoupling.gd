@@ -1,3 +1,5 @@
+# TransformCoupling.gd
+
 tool
 
 class_name TransformCoupling
@@ -6,14 +8,16 @@ extends Component
 
 
 var transform_holder_leader = null
-var transform_holder_followers = [ null, null, null ]
+var transform_holder_followers = [ null, null, null, null ]
 
 
 
-export(NodePath) var transform_holder_leader_path = null setget set_transform_holder_leader_path, get_transform_holder_leader_path
-export(NodePath) var transform_holder_follower_path_1 = null setget set_transform_holder_follower_path_1, get_transform_holder_follower_path_1
-export(NodePath) var transform_holder_follower_path_2 = null setget set_transform_holder_follower_path_2, get_transform_holder_follower_path_2
-export(NodePath) var transform_holder_follower_path_3 = null setget set_transform_holder_follower_path_3, get_transform_holder_follower_path_3
+export(NodePath) var transform_holder_leader_path = NodePath() setget set_transform_holder_leader_path
+export(NodePath) var transform_holder_follower_path_0 = NodePath() setget set_transform_holder_follower_path_0
+export(NodePath) var transform_holder_follower_path_1 = NodePath() setget set_transform_holder_follower_path_1
+export(NodePath) var transform_holder_follower_path_2 = NodePath() setget set_transform_holder_follower_path_2
+export(NodePath) var transform_holder_follower_path_3 = NodePath() setget set_transform_holder_follower_path_3
+
 
 
 export(bool) var couple_origin_x = false
@@ -27,32 +31,20 @@ export(bool) var couple_y_hat = false
 
 
 func _ready():
-	assert(transform_holder_leader_path != null)
-	assert(transform_holder_follower_path_1 != null or transform_holder_follower_path_2 != null or transform_holder_follower_path_3 != null)
+	assert(transform_holder_leader_path != "")
+	assert(transform_holder_follower_path_0 != ""
+		or transform_holder_follower_path_1 != ""
+		or transform_holder_follower_path_2 != ""
+		or transform_holder_follower_path_3 != "")
 	
-	transform_holder_leader = get_node(transform_holder_leader_path)
-	
-	if transform_holder_follower_path_1 != null:
-		transform_holder_followers[0] = get_node(transform_holder_follower_path_1)
+	set_transforms()
 
-	if transform_holder_follower_path_2 != null:
-		transform_holder_followers[1] = get_node(transform_holder_follower_path_2)
-
-	if transform_holder_follower_path_3 != null:
-		transform_holder_followers[2] = get_node(transform_holder_follower_path_3)
 
 
 func _process(_delta):
 	if Engine.editor_hint:
-		if transform_holder_leader_path != null:
-			transform_holder_leader = get_node(transform_holder_leader_path)
-		if transform_holder_follower_path_1 != null:
-			transform_holder_followers[0] = get_node(transform_holder_follower_path_1)
-		if transform_holder_follower_path_2 != null:
-			transform_holder_followers[1] = get_node(transform_holder_follower_path_2)
-		if transform_holder_follower_path_3 != null:
-			transform_holder_followers[2] = get_node(transform_holder_follower_path_3)
-			
+		set_transforms()
+	
 	for i in range(transform_holder_followers.size()):
 		if transform_holder_followers[i] != null:
 			if couple_origin_x:
@@ -73,32 +65,49 @@ func _process(_delta):
 
 
 
+func set_transforms():
+	if transform_holder_leader == null and transform_holder_leader_path != "":
+		transform_holder_leader = get_node(transform_holder_leader_path)
+	if transform_holder_followers[0] == null and transform_holder_follower_path_0 != "":
+		transform_holder_followers[0] = get_node(transform_holder_follower_path_0)
+	if transform_holder_followers[1] == null and transform_holder_follower_path_1 != "":
+		transform_holder_followers[1] = get_node(transform_holder_follower_path_1)
+	if transform_holder_followers[2] == null and transform_holder_follower_path_2 != "":
+		transform_holder_followers[2] = get_node(transform_holder_follower_path_2)
+	if transform_holder_followers[3] == null and transform_holder_follower_path_3 != "":
+		transform_holder_followers[3] = get_node(transform_holder_follower_path_3)
+
+
+
 func set_transform_holder_leader_path(path: NodePath) -> void:
 	transform_holder_leader_path = path
-	
-func get_transform_holder_leader_path() -> NodePath:
-	return transform_holder_leader_path
+	if path == "":
+		transform_holder_leader = null
+
+
+
+func set_transform_holder_follower_path_0(path: NodePath) -> void:
+	transform_holder_follower_path_0 = path
+	if path == "":
+		transform_holder_followers[0] = null
 
 
 
 func set_transform_holder_follower_path_1(path: NodePath) -> void:
 	transform_holder_follower_path_1 = path
-	
-func get_transform_holder_follower_path_1() -> NodePath:
-	return transform_holder_follower_path_1
+	if path == "":
+		transform_holder_followers[1] = null
 
 
 
 func set_transform_holder_follower_path_2(path: NodePath) -> void:
 	transform_holder_follower_path_2 = path
-	
-func get_transform_holder_follower_path_2() -> NodePath:
-	return transform_holder_follower_path_2
+	if path == "":
+		transform_holder_followers[2] = null
 
 
 
 func set_transform_holder_follower_path_3(path: NodePath) -> void:
 	transform_holder_follower_path_3 = path
-	
-func get_transform_holder_follower_path_3() -> NodePath:
-	return transform_holder_follower_path_3
+	if path == "":
+		transform_holder_followers[3] = null

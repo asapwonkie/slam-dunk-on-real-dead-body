@@ -18,4 +18,7 @@ position = Vector2( 528, 680 )
 [node name="Area2D" parent="Player" index="3"]
 position = Vector2( 528, 680 )
 
+[node name="TransformCoupling" parent="Player" index="4"]
+transform_holder_follower_path_3 = NodePath("")
+
 [editable path="Player"]

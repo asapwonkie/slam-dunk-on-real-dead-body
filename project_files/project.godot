@@ -15,11 +15,6 @@ _global_script_classes=[ {
 "path": "res://scripts/Area2DHurtPlayerOnTouch.gd"
 }, {
 "base": "Component",
-"class": "CameraFollow",
-"language": "GDScript",
-"path": "res://scripts/CameraFollow.gd"
-}, {
-"base": "Component",
 "class": "CharacterController",
 "language": "GDScript",
 "path": "res://scripts/CharacterController.gd"
@@ -43,6 +38,11 @@ _global_script_classes=[ {
 "class": "GameObject",
 "language": "GDScript",
 "path": "res://scripts/GameObject.gd"
+}, {
+"base": "Component",
+"class": "GraveController",
+"language": "GDScript",
+"path": "res://scripts/GraveController.gd"
 }, {
 "base": "Component",
 "class": "Health",
@@ -78,22 +78,28 @@ _global_script_classes=[ {
 "class": "TransformCoupling",
 "language": "GDScript",
 "path": "res://scripts/TransformCoupling.gd"
+}, {
+"base": "Node",
+"class": "TransformHolder",
+"language": "GDScript",
+"path": "res://scripts/TransformHolder.gd"
 } ]
 _global_script_class_icons={
 "Area2DHurtPlayerOnTouch": "",
-"CameraFollow": "",
 "CharacterController": "",
 "Component": "",
 "Console": "",
 "DigCasket": "",
 "GameObject": "",
+"GraveController": "",
 "Health": "",
 "LoadCemetery": "",
 "PlayerAnimation": "",
 "PlayerInput": "",
 "RandomMovement": "",
 "TileMapScript": "",
-"TransformCoupling": ""
+"TransformCoupling": "",
+"TransformHolder": ""
 }
 
 [application]

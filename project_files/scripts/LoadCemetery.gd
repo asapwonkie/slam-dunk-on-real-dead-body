@@ -26,6 +26,6 @@ func load_objects():
 		
 		if tile_name == "grave":
 			var grave = GRAVE.instance()
-			var sprite = grave.get_child_of_type(Sprite)
-			sprite.transform = tile_map.get_world_transform(pos, sprite.transform)
 			game_object.call_deferred("add_child", grave)
+			yield(grave, "ready")
+			grave.get_child_of_type(GraveController).load_grave(get_parent(), pos)

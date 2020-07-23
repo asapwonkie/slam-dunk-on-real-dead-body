@@ -4,7 +4,7 @@ extends TileMap
 
 
 
-func get_world_transform(pos, transform_from):
+func get_world_transform(pos):
 	var id = get_cellv(pos)
 	var size = tile_set.tile_get_region(id).size / cell_size
 	
@@ -23,8 +23,6 @@ func get_world_transform(pos, transform_from):
 
 func get_cell_pos(transform_from, size):
 	var rot = transform_from.get_rotation()
-	
-	size = size * cell_size
 	
 	if is_equal_approx(rot, 0):
 		return world_to_map(transform_from.origin)

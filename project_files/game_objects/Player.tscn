@@ -40,7 +40,7 @@ position = Vector2( 20.5, -6.5 )
 
 [node name="BackPosition" type="Position2D" parent="KinematicBody2D"]
 position = Vector2( 0, -4.266 )
-rotation = -2.30209
+rotation = 2.35619
 
 [node name="Shovel" parent="KinematicBody2D/BackPosition" instance=ExtResource( 7 )]
 z_index = -1

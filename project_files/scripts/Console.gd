@@ -4,24 +4,59 @@ extends Node
 
 
 
+class Command:
+	var func_name = ""
+	var func_ref = null
+	var num_args = 0
+	var arg_names = null
+	
+	func create(_func_name, _func_ref, _num_args = 0, _arg_names = null):
+		func_name = _func_name
+		func_ref = _func_ref
+		num_args = _num_args
+		arg_names = _arg_names
+	
+	func run(args):
+		if args.size() == num_args:
+			if num_args == 0:
+				func_ref.call_func()
+			elif num_args == 1:
+				func_ref.call_func(args[0])
+		else:
+			return 1
+
+
+
+const WORLD = preload("res://scenes/World.tscn")
+
+
+
 onready var fps_label = get_node("/root/Main/GUI/FPSLabel")
 
 
 
-var entered_commands = Array()
 var open = false
-var commands_list = { "quit" : funcref(self, "quit"),
-					  "help" : funcref(self, "help"),
-					  "show_fps" : funcref(self, "show_fps") }
-var nargs_list = { "quit": 0,
-				  "help": 0,
-				  "show_fps": 1 }
+var commands_list = { }
+var entered_commands = Array()
 
 
 
 func _ready():
 	open = true
 	toggle_console()
+	
+	commands_list["help"] = Command.new()
+	commands_list["help"].create("help", funcref(self, "help"), 0)
+	
+	commands_list["quit"] = Command.new()
+	commands_list["quit"].create("quit", funcref(self, "quit"), 0)
+	
+	commands_list["restart"] = Command.new()
+	commands_list["restart"].create("restart", funcref(self, "restart"), 0)
+	
+	commands_list["show_fps"] = Command.new()
+	commands_list["show_fps"].create("show_fps", funcref(self, "show_fps"), 1, ["value"])
+	
 	$OutputField.clear()
 
 
@@ -53,44 +88,39 @@ func toggle_console():
 
 
 
-func enter_command(command: String) -> void:
-	entered_commands.push_back(command)
+func enter_command(text: String) -> void:
+	entered_commands.push_back(text)
 	
-	print_entered_command(command)
+	print_entered_command(text)
 	$InputField.clear()
 	
-	var split = command.split(" ")
-	var f = split[0]
-	var nargs = split.size() - 1
+	var split = text.split(" ")
+	var func_name = split[0]
+	split.remove(0)
+	var args = split
 	
-	if commands_list.has(f):
-		if nargs_list[f] == nargs:
-			if nargs == 0:
-				commands_list[f].call_func()
-			elif nargs == 1:
-				commands_list[f].call_func(split[1])
-		else:
-			if nargs_list[f] == 1:
-				print_error(str("Command ", f, " takes 1 argument.\n"))
+	var command = commands_list.get(func_name)
+	if command != null:
+		var args_error = command.run(args)
+		if args_error:
+			if command.num_args == 1:
+				print_error(str("Command ", func_name, " takes 1 argument.\n"))
 			else:
-				print_error(str("Command ", f, " takes ", nargs_list[f], " arguments.\n"))
+				print_error(str("Command ", func_name, " takes ", command.num_args, " arguments.\n"))
 	else:
-		print_error(str("Unknown command \"", command, "\"\n"))
+		print_error(str("Unknown command \"", func_name, "\"\n"))
 
 
 
 func print_entered_command(command):
 	$OutputField.add_text(command + "\n")
-	
+
+
+
 func print_error(message):
 	$OutputField.push_color(Color(255, 255, 255, 255))
 	$OutputField.add_text(message + "\n")
 	$OutputField.pop()
-
-
-
-func quit():
-	get_tree().quit()
 
 
 
@@ -99,6 +129,16 @@ func help():
 	for command in commands_list.keys():
 		$OutputField.add_text(str(command, '\n'))
 
+
+
+func quit():
+	get_tree().quit()
+
+
+
+func restart():
+	get_node("/root/Main/World").free()
+	get_node("/root/Main").add_child(WORLD.instance())
 
 
 func show_fps(value):

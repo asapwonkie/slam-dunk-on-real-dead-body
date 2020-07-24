@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/World.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Console.tscn" type="PackedScene" id=2]
-[ext_resource path="res://game_objects/GameCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/ShowFPS.gd" type="Script" id=4]
 
 [node name="Main" type="Node"]
@@ -23,13 +22,3 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="GameCamera" parent="." instance=ExtResource( 3 )]
-position = Vector2( 528, 690 )
-
-[node name="TransformCoupling" parent="GameCamera" index="0"]
-transform_holder_leader_path = NodePath("../../World/Player/KinematicBody2D")
-
-[editable path="World"]
-
-[editable path="GameCamera"]

@@ -16,12 +16,12 @@ var casket_index = 4
 
 func load_grave(c, map_pos):
 	cemetery = c
-	game_object.global_transform = cemetery.get_node("TileMap").get_world_transform(map_pos)
+	game_object.global_transform = cemetery.get_child_of_type(TileMap).get_world_transform(map_pos)
 
 
 
 func open():
-	var tile_map = cemetery.get_node("TileMap")
+	var tile_map = cemetery.get_child_of_type(TileMap)
 	var map_pos = tile_map.get_cell_pos(game_object.global_transform, size)
 	
 	var flip_x = tile_map.get_flip_x(game_object.global_transform)

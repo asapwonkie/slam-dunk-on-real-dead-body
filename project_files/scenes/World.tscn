@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/Cemetery.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game_objects/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game_objects/GameCamera.tscn" type="PackedScene" id=3]
 
 [node name="World" type="Node"]
 
@@ -9,3 +10,11 @@
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 528, 690 )
+
+[node name="GameCamera" parent="." instance=ExtResource( 3 )]
+position = Vector2( 528, 690 )
+
+[node name="TransformCoupling" parent="GameCamera" index="0"]
+transform_holder_leader_path = NodePath("../../Player")
+
+[editable path="GameCamera"]

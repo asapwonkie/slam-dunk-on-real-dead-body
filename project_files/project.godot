@@ -93,6 +93,11 @@ _global_script_classes=[ {
 "class": "UpdateGOTransform",
 "language": "GDScript",
 "path": "res://scripts/UpdateGOTransform.gd"
+}, {
+"base": "Component",
+"class": "ZombieAI",
+"language": "GDScript",
+"path": "res://scripts/ZombieAI.gd"
 } ]
 _global_script_class_icons={
 "Area2DHurtPlayerOnTouch": "",
@@ -111,7 +116,8 @@ _global_script_class_icons={
 "TileMapScript": "",
 "TransformCoupling": "",
 "TransformHolder": "",
-"UpdateGOTransform": ""
+"UpdateGOTransform": "",
+"ZombieAI": ""
 }
 
 [application]

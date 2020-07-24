@@ -25,17 +25,21 @@ func switch_to_secondary():
 	if primary == null and secondary != null:
 		primary = secondary
 		secondary = null
+		primary.z_index = 1
 		secondary_position.remove_child(primary)
 		primary_position.add_child(primary)
 	elif primary != null and secondary == null:
 		secondary = primary
 		primary = null
+		secondary.z_index = -1
 		primary_position.remove_child(secondary)
 		secondary_position.add_child(secondary)
 	elif primary != null and secondary != null:
 		var temp_primary = primary
 		primary = secondary
 		secondary = temp_primary
+		primary.z_index = 1
+		secondary.z_index = -1
 		primary_position.remove_child(secondary)
 		secondary_position.remove_child(primary)
 		primary_position.add_child(primary)

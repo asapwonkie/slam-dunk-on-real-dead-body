@@ -1,7 +1,5 @@
 # UpdateGOTransform.gd
 
-# tool
-
 class_name UpdateGOTransform
 extends Component
 

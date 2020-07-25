@@ -23,6 +23,10 @@ onready var secondary_position = game_object.get_child_of_name("SecondaryPositio
 
 
 
+var gold = 0
+
+
+
 func set_primary_node_path(path):
 	primary_node_path = path
 
@@ -94,12 +98,17 @@ func pick_up():
 	
 	for area in overlapping_areas:
 		game_object = get_game_object(area)
-		if game_object != primary and game_object != secondary:
-			if primary == null:
-				set_primary(get_game_object(area))
-			elif secondary == null:
-				set_secondary(get_game_object(area))
-			break
+		if game_object.has_child_of_type(Equippable):
+			if game_object != primary and game_object != secondary:
+				if primary == null:
+					set_primary(get_game_object(area))
+				elif secondary == null:
+					set_secondary(get_game_object(area))
+				break
+		elif game_object.name == "Gold":
+			game_object.queue_free()
+			gold += 1
+			print(gold)
 
 
 

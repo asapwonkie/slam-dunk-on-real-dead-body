@@ -4,6 +4,7 @@ extends Component
 
 
 
+const GOLD = preload("res://game_objects/Gold.tscn")
 const ZOMBIE = preload("res://game_objects/Zombie.tscn")
 const CASKET_INDEX = 4
 const GRAVE_SIZE = Vector2(48, 96)
@@ -17,7 +18,7 @@ var zombie_inside = true
 
 
 onready var timer = Timer.new()
-export(float) var wait_time = 5
+export(float) var wait_time = 2
 
 
 
@@ -44,28 +45,38 @@ func open():
 		var transpose = tile_map.get_transposed(game_object.global_transform)
 		
 		tile_map.set_cell(map_pos.x, map_pos.y, CASKET_INDEX, flip_x, flip_y, transpose)
-			
+		
+		spawn_gold()
 		
 			
 func spawn_zombie():
 	zombie_inside = false
 	
 	var zombie = ZOMBIE.instance()
+	zombie.transform.origin = cemetery.get_child_of_type(TileMap).map_to_world(get_spawn_coords())
 	
+	cemetery.add_child(zombie)
+
+
+
+func spawn_gold():
+	var gold = GOLD.instance()
+	gold.transform.origin = cemetery.get_child_of_type(TileMap).map_to_world(get_spawn_coords())
+	cemetery.add_child(gold)
+
+
+
+func get_spawn_coords():
 	var tile_map = cemetery.get_child_of_type(TileMap)
 	var map_pos = tile_map.get_cell_pos(game_object.global_transform, GRAVE_SIZE)
 	
-	var spawn_coords
 	if !tile_map.get_transposed(game_object.global_transform):
 		if !tile_map.get_flip_y(game_object.global_transform):
-			spawn_coords = map_pos + Vector2(2, 7)
+			return map_pos + Vector2(2, 7)
 		else:
-			spawn_coords = map_pos + Vector2(2, -1)
+			return map_pos + Vector2(2, -1)
 	else:
 		if !tile_map.get_flip_x(game_object.global_transform):
-			spawn_coords = map_pos + Vector2(7, 1)
+			return map_pos + Vector2(7, 1)
 		else:
-			spawn_coords = map_pos + Vector2(-1, 1)
-			
-	zombie.transform.origin = tile_map.map_to_world(spawn_coords)
-	cemetery.add_child(zombie)
+			return map_pos + Vector2(-1, 1)

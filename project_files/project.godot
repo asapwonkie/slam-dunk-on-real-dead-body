@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Dig.gd"
 }, {
+"base": "Component",
+"class": "Equippable",
+"language": "GDScript",
+"path": "res://scripts/Equippable.gd"
+}, {
 "base": "Node2D",
 "class": "GameObject",
 "language": "GDScript",
@@ -105,6 +110,7 @@ _global_script_class_icons={
 "Component": "",
 "Console": "",
 "Dig": "",
+"Equippable": "",
 "GameObject": "",
 "GraveController": "",
 "Health": "",

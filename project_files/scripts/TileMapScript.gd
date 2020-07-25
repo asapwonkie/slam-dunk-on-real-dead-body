@@ -58,10 +58,6 @@ func is_near(source_global_position, target_global_position, num_cells):
 	var target_map_pos = world_to_map(target_global_position)
 	var size = num_cells * 3
 	
-	print(str("Source: ", source_map_pos))
-	print(str("Target: ", target_map_pos))
-	print(size)
-	
 	return ( target_map_pos.x >= source_map_pos.x - size.x
 			and target_map_pos.x <= source_map_pos.x + size.x
 			and target_map_pos.y >= source_map_pos.y - size.y

@@ -11,7 +11,7 @@ onready var character_controller = game_object.get_child_of_type(CharacterContro
 
 
 func _process(_delta):
-	if game_object.get_parent().get_child_of_type(TileMap).is_near(game_object.global_position, player.global_position, Vector2(2, 2)):
+	if game_object.get_parent().get_child_of_type(TileMap).is_near(game_object.global_position, player.global_position, Vector2(5, 5)):
 		var path_to_player = nav.get_simple_path(game_object.global_position, player.global_position)
 		game_object.get_child_of_type(Line2D).points = path_to_player
 		var direction = (path_to_player[1] - game_object.global_position).normalized()

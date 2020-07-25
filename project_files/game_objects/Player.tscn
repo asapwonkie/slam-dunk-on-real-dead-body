@@ -6,11 +6,13 @@
 [ext_resource path="res://scripts/CharacterController.gd" type="Script" id=4]
 [ext_resource path="res://scripts/PlayerInput.gd" type="Script" id=5]
 [ext_resource path="res://scripts/GameObject.gd" type="Script" id=6]
-[ext_resource path="res://game_objects/Shovel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scripts/PlayerInventory.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 4 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 15.7084, 24.3165 )
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 6 )
@@ -35,15 +37,19 @@ collision_mask = 4
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="KinematicBody2D/DigBox"]
 shape = SubResource( 1 )
 
-[node name="HandPosition" type="Position2D" parent="KinematicBody2D"]
+[node name="PrimaryPosition" type="Position2D" parent="KinematicBody2D"]
 position = Vector2( 20.5, -6.5 )
 
-[node name="BackPosition" type="Position2D" parent="KinematicBody2D"]
+[node name="SecondaryPosition" type="Position2D" parent="KinematicBody2D"]
 position = Vector2( 0, -4.266 )
 rotation = 2.35619
 
-[node name="Shovel" parent="KinematicBody2D/BackPosition" instance=ExtResource( 7 )]
-z_index = -1
+[node name="PickUpArea" type="Area2D" parent="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/PickUpArea"]
+shape = SubResource( 2 )
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 1 )

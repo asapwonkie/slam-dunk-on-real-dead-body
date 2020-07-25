@@ -141,6 +141,7 @@ func restart():
 	get_node("/root/Main").add_child(WORLD.instance())
 
 
+
 func show_fps(value):
 	if value == "0" or value == "1":
 		fps_label.visible = int(value)

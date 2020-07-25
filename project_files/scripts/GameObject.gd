@@ -5,6 +5,11 @@ extends Node2D
 
 
 
+# idea: tool script that exposes user-chosen variables from components in gameobject
+# var exported_variables = [ ]
+
+
+
 func has_child_of_type(child_class):
 	var queue = Array()
 	queue.push_back(self)

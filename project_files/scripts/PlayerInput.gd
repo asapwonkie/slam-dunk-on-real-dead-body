@@ -14,6 +14,8 @@ export(String) var down_action = "Down"
 export(String) var dash_action = "Dash"
 export(String) var use_action = "Use"
 export(String) var equip_secondary_action = "EquipSecondary"
+export(String) var drop_action = "Drop"
+export(String) var pickup_action = "PickUp"
 
 
 
@@ -39,3 +41,9 @@ func _process(_delta):
 		
 	if Input.is_action_just_pressed(equip_secondary_action):
 		player_inventory.switch_to_secondary()
+		
+	if Input.is_action_just_pressed(drop_action):
+		player_inventory.drop_primary()
+		
+	if Input.is_action_just_pressed(pickup_action):
+		player_inventory.pick_up()

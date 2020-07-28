@@ -30,7 +30,7 @@ func _process(_delta):
 	if Engine.editor_hint:
 		set_node_from()
 	
-	if node_from_path != null:
+	if node_from != null:
 		if couple_origin_x:
 			game_object.transform.origin.x = node_from.global_position.x
 		if couple_origin_y:

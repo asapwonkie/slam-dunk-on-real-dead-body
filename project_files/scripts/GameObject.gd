@@ -5,8 +5,22 @@ extends Node2D
 
 
 
-# idea: tool script that exposes user-chosen variables from components in gameobject
-# var exported_variables = [ ]
+export(String) var go_type = ""
+
+
+
+# maybe needed if world is deleted and recreated
+#func get_world():
+#	return get_node("/root/Main/World")
+onready var go_world = get_node("/root/Main/GameWorld")
+
+
+
+func get_game_object(node):
+	if node.get("go_type") != null:
+		return node
+	else:
+		return get_game_object(node.get_parent())
 
 
 

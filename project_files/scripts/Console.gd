@@ -27,7 +27,7 @@ class Command:
 
 
 
-const WORLD = preload("res://scenes/World.tscn")
+const WORLD = preload("res://scenes/GameWorld.tscn")
 
 
 
@@ -137,7 +137,7 @@ func quit():
 
 
 func restart():
-	get_node("/root/Main/World").free()
+	get_node("/root/Main/GameWorld").free()
 	get_node("/root/Main").add_child(WORLD.instance())
 
 

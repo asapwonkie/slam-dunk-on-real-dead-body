@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Area2DHurtPlayerOnTouch.gd"
 }, {
+"base": "GameObject",
+"class": "Cemetery",
+"language": "GDScript",
+"path": "res://scripts/Cemetery.gd"
+}, {
 "base": "Component",
 "class": "CharacterController",
 "language": "GDScript",
@@ -30,11 +35,6 @@ _global_script_classes=[ {
 "path": "res://scripts/Console.gd"
 }, {
 "base": "Component",
-"class": "Dig",
-"language": "GDScript",
-"path": "res://scripts/Dig.gd"
-}, {
-"base": "Component",
 "class": "Equippable",
 "language": "GDScript",
 "path": "res://scripts/Equippable.gd"
@@ -44,20 +44,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/GameObject.gd"
 }, {
-"base": "Component",
-"class": "GraveController",
+"base": "GameObject",
+"class": "GameWorld",
 "language": "GDScript",
-"path": "res://scripts/GraveController.gd"
+"path": "res://scripts/GameWorld.gd"
+}, {
+"base": "GameObject",
+"class": "Grave",
+"language": "GDScript",
+"path": "res://scripts/Grave.gd"
 }, {
 "base": "Component",
 "class": "Health",
 "language": "GDScript",
 "path": "res://scripts/Health.gd"
 }, {
-"base": "Component",
-"class": "LoadCemetery",
+"base": "GameObject",
+"class": "Player",
 "language": "GDScript",
-"path": "res://scripts/LoadCemetery.gd"
+"path": "res://scripts/Player.gd"
 }, {
 "base": "Component",
 "class": "PlayerAnimation",
@@ -79,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/RandomMovement.gd"
 }, {
+"base": "GameObject",
+"class": "Shovel",
+"language": "GDScript",
+"path": "res://scripts/Shovel.gd"
+}, {
 "base": "TileMap",
 "class": "TileMapScript",
 "language": "GDScript",
@@ -99,31 +109,33 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/UpdateGOTransform.gd"
 }, {
-"base": "Component",
-"class": "ZombieAI",
+"base": "GameObject",
+"class": "Zombie",
 "language": "GDScript",
-"path": "res://scripts/ZombieAI.gd"
+"path": "res://scripts/Zombie.gd"
 } ]
 _global_script_class_icons={
 "Area2DHurtPlayerOnTouch": "",
+"Cemetery": "",
 "CharacterController": "",
 "Component": "",
 "Console": "",
-"Dig": "",
 "Equippable": "",
 "GameObject": "",
-"GraveController": "",
+"GameWorld": "",
+"Grave": "",
 "Health": "",
-"LoadCemetery": "",
+"Player": "",
 "PlayerAnimation": "",
 "PlayerInput": "",
 "PlayerInventory": "",
 "RandomMovement": "",
+"Shovel": "",
 "TileMapScript": "",
 "TransformCoupling": "",
 "TransformHolder": "",
 "UpdateGOTransform": "",
-"ZombieAI": ""
+"Zombie": ""
 }
 
 [application]
@@ -247,6 +259,11 @@ Drop={
 PickUp={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Debug={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":48,"unicode":0,"echo":false,"script":null)
  ]
 }
 

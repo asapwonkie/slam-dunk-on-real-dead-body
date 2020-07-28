@@ -36,8 +36,8 @@ func _process(_delta):
 		character_controller.dash()
 		
 	if Input.is_action_just_pressed(use_action) and player_inventory.primary != null:
-		if player_inventory.primary.name == "Shovel":
-			player_inventory.primary.get_child_of_type(Dig).dig(dig_box)
+		if player_inventory.primary is Shovel:
+			player_inventory.primary.dig(dig_box)
 		
 	if Input.is_action_just_pressed(equip_secondary_action):
 		player_inventory.switch_to_secondary()

@@ -6,7 +6,6 @@ extends Component
 
 # requires an Area2D named 'PickUpArea'
 # requries two Position2Ds named 'PrimaryPosition' and 'SecondaryPosition'
-var shovel
 
 
 var primary = null
@@ -42,37 +41,38 @@ func _ready():
 		set_primary(get_node(primary_node_path))
 	if secondary_node_path != "":
 		set_secondary(get_node(secondary_node_path))
-	shovel = primary
 
 
 
-func set_primary(game_object):
-	if game_object == null:
-		primary_position.remove_child(primary)
+func set_primary(go_primary):
+	if go_primary == null:
+		primary.get_parent().call_deferred("remove_child", primary)
 		primary = null
 	else:
-		primary = game_object
+		primary = go_primary
 		
 		primary.transform = Transform2D(0, Vector2.ZERO)
 		primary.z_index = 1
-		if game_object.is_inside_tree():
-			game_object.get_parent().call_deferred("remove_child", game_object)
+		
+		if go_primary.is_inside_tree():
+			go_primary.get_parent().call_deferred("remove_child", go_primary)
 			
 		primary_position.call_deferred("add_child", primary)
 
 
 
-func set_secondary(game_object):
-	if game_object == null:
-		secondary_position.remove_child(secondary)
+func set_secondary(go_secondary):
+	if go_secondary == null:
+		secondary.get_parent().call_deferred("remove_child", secondary)
 		secondary = null
 	else:
-		secondary = game_object
+		secondary = go_secondary
 		
 		secondary.transform = Transform2D(0, Vector2.ZERO)
 		secondary.z_index = -1
-		if game_object.is_inside_tree():
-			game_object.get_parent().call_deferred("remove_child", game_object)
+		
+		if go_secondary.is_inside_tree():
+			go_secondary.get_parent().call_deferred("remove_child", go_secondary)
 		
 		secondary_position.call_deferred("add_child", secondary)
 
@@ -94,21 +94,21 @@ func switch_to_secondary():
 
 func pick_up():
 	var overlapping_areas = pickup_area.get_overlapping_areas()
-	var game_object = null
+	var go = null
 	
 	for area in overlapping_areas:
-		game_object = get_game_object(area)
-		if game_object.has_child_of_type(Equippable):
-			if game_object != primary and game_object != secondary:
+		go = get_game_object(area)
+		if go.has_child_of_type(Equippable):
+			if go != primary and go != secondary:
 				if primary == null:
 					set_primary(get_game_object(area))
 				elif secondary == null:
 					set_secondary(get_game_object(area))
 				break
-		elif game_object.name == "Gold":
-			game_object.queue_free()
+		elif go.go_type == "Gold":
+			go.queue_free()
 			gold += 1
-			print(gold)
+			print(str("Gold = ", gold))
 
 
 
@@ -117,4 +117,4 @@ func drop_primary():
 		var temp_primary = primary
 		temp_primary.transform = temp_primary.global_transform
 		set_primary(null)
-		get_node("/root/Main/World").add_child(temp_primary)
+		game_object.go_world.call_deferred("add_child", temp_primary)

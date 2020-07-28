@@ -1,30 +1,26 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tile_art/cemetery_tiles_prototype.png" type="Texture" id=1]
-[ext_resource path="res://scripts/GameObject.gd" type="Script" id=2]
-[ext_resource path="res://scripts/GraveController.gd" type="Script" id=5]
+[ext_resource path="res://scripts/Grave.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 8 )
 
 [node name="Grave" type="Node2D"]
-script = ExtResource( 2 )
+script = ExtResource( 5 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="GraveFoot" type="Area2D" parent="."]
 monitoring = false
 collision_layer = 4
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GraveFoot"]
 position = Vector2( 24, 96 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="Area2D"]
+[node name="Sprite" type="Sprite" parent="GraveFoot"]
 visible = false
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 48, 96 )
-
-[node name="GraveController" type="Node" parent="."]
-script = ExtResource( 5 )

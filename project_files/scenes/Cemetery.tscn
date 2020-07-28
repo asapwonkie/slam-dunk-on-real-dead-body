@@ -7,7 +7,7 @@
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 48, 96, 0, 96, 0, 0, 48, 0 )
 
-[sub_resource type="NavigationPolygon" id=7]
+[sub_resource type="NavigationPolygon" id=2]
 vertices = PoolVector2Array( 48, 48, 0, 48, 0, 0, 48, 0 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
@@ -17,8 +17,8 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 48, 96, 0, 96, 0, 0, 48, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=5]
-points = PoolVector2Array( 48, 48, 0, 48, 0, 0, 48, 0 )
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 0, 0, 48, 0, 48, 48, 0, 48 )
 
 [sub_resource type="TileSet" id=6]
 0/name = "grave"
@@ -45,7 +45,7 @@ points = PoolVector2Array( 48, 48, 0, 48, 0, 0, 48, 0 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
 1/navigation_offset = Vector2( 0, 0 )
-1/navigation = SubResource( 7 )
+1/navigation = SubResource( 2 )
 1/shapes = [  ]
 1/z_index = 0
 2/name = "fence"
@@ -102,7 +102,7 @@ points = PoolVector2Array( 48, 48, 0, 48, 0, 0, 48, 0 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
+"shape": SubResource( 7 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 5/z_index = 0

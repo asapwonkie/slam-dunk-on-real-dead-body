@@ -22,12 +22,16 @@ func create(_cemetery):
 func _process(_delta):
 	if can_see_player():
 		target_position = player.global_position
-	elif target_position == null or global_position.distance_to(target_position) <= go_world.CELL_SIZE * 2:
+	elif target_position == null or global_position.distance_to(target_position) <= 0.5 * go_world.CELL_SIZE:
 		var path_tiles = cemetery.tile_map.get_used_cells_by_id(go_world.PATH_ID)
 		var rand = go_world.rng.randi_range(0, path_tiles.size() - 1)
 		target_position = cemetery.tile_map.map_to_world(path_tiles[rand]) + 1.5 * go_world.CELL_SIZE * Vector2.ONE
 		
 	var path = cemetery.nav.get_simple_path(global_position, target_position, false)
+	if path.size() == 2:
+		path.remove(1)
+	path.append(target_position)
+	
 	$UpdateGOTransform/Line2D.points = path
 	var direction = (path[1] - path[0]).normalized()
 	character_controller.walk(direction)

@@ -25,7 +25,7 @@ func _process(_delta):
 	elif target_position == null or global_position.distance_to(target_position) <= 0.5 * go_world.CELL_SIZE:
 		var path_tiles = cemetery.tile_map.get_used_cells_by_id(go_world.PATH_ID)
 		var rand = go_world.rng.randi_range(0, path_tiles.size() - 1)
-		target_position = cemetery.tile_map.map_to_world(path_tiles[rand]) + 1.5 * go_world.CELL_SIZE * Vector2.ONE
+		target_position = cemetery.tile_map.map_to_world(path_tiles[rand]) + 0.5 * go_world.CELL_SIZE * go_world.PATH_SIZE * Vector2.ONE
 		
 	var path = cemetery.nav.get_simple_path(global_position, target_position, false)
 	if path.size() == 2:

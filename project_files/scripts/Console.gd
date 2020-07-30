@@ -54,8 +54,11 @@ func _ready():
 	commands_list["restart"] = Command.new()
 	commands_list["restart"].create("restart", funcref(self, "restart"), 0)
 	
-	commands_list["show_fps"] = Command.new()
-	commands_list["show_fps"].create("show_fps", funcref(self, "show_fps"), 1, ["value"])
+	commands_list["showfps"] = Command.new()
+	commands_list["showfps"].create("showfps", funcref(self, "showfps"), 1, ["value"])
+	
+	commands_list["timescale"] = Command.new()
+	commands_list["timescale"].create("timescale", funcref(self, "timescale"), 1, ["value"])
 	
 	$OutputField.clear()
 
@@ -84,7 +87,6 @@ func toggle_console():
 		$InputField.visible = true
 		$InputField.pause_mode = Node.PAUSE_MODE_PROCESS
 		$InputField.grab_focus()
-		$InputField.clear()
 
 
 
@@ -142,8 +144,16 @@ func restart():
 
 
 
-func show_fps(value):
+func showfps(value):
 	if value == "0" or value == "1":
 		fps_label.visible = int(value)
 	else:
-		print_error("Command show_fps takes a value of 0 or 1.")
+		print_error("Error: Expected value of 0 or 1.")
+
+
+
+func timescale(value):
+	if float(value) > 0:
+		Engine.time_scale = float(value)
+	else:
+		print_error("Error: Expected value greater than 0.")

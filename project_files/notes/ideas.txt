@@ -56,3 +56,8 @@ Soundtrack:
 -flashlight has battery that runs down over time. can buy new ones at gas station.
 -can put down a flashlight on the ground to illuminate a path
 -pet cemetery with dogs
+-make game stealthy
+-zombies attracted to flashlight
+-big zombies move slowly but kill in one hit. they have high hp.
+-regular zombies move a little faster but have less hp and damage.
+-maybe zombies can hide in the trees

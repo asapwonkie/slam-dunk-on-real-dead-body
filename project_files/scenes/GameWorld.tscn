@@ -5,7 +5,7 @@
 [ext_resource path="res://game_objects/Gun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Cemetery.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game_objects/Shovel.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scripts/GameWorld.gd" type="Script" id=6]
+[ext_resource path="res://scripts/GameObject.gd" type="Script" id=6]
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource( 6 )
@@ -35,6 +35,8 @@ transform_holder_leader_path = NodePath("../../Player")
 [node name="Shovel" parent="ItemHolder" instance=ExtResource( 5 )]
 
 [node name="Gun" parent="ItemHolder" instance=ExtResource( 3 )]
+
+[node name="BulletHolder" type="Node" parent="."]
 
 [editable path="Player"]
 

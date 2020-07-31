@@ -60,7 +60,7 @@ func spawn_zombie():
 	
 	#zombie.NAV
 	
-	go_world.get_child_of_name("ZombieHolder").add_child(zombie)
+	GameWorld.get_child_of_name("ZombieHolder").add_child(zombie)
 	
 	timer.queue_free()
 
@@ -69,7 +69,7 @@ func spawn_zombie():
 func spawn_gold():
 	var gold = GOLD.instance()
 	gold.transform.origin = cemetery.tile_map.map_to_world(get_spawn_coords())
-	go_world.get_child_of_name("ItemHolder").add_child(gold)
+	GameWorld.get_child_of_name("ItemHolder").add_child(gold)
 
 
 

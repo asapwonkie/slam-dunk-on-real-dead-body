@@ -20,19 +20,21 @@ func create(_cemetery):
 
 
 func _process(_delta):
-	if can_see_player():
+	if ( target_position == null
+		 or global_position.distance_to(target_position) <= 0.5 * Main.CELL_SIZE
+		 or can_see_player() ):
 		target_position = player.global_position
-	elif target_position == null or global_position.distance_to(target_position) <= 0.5 * go_world.CELL_SIZE:
-		var path_tiles = cemetery.tile_map.get_used_cells_by_id(go_world.PATH_ID)
-		var rand = go_world.rng.randi_range(0, path_tiles.size() - 1)
-		target_position = cemetery.tile_map.map_to_world(path_tiles[rand]) + 0.5 * go_world.CELL_SIZE * go_world.PATH_SIZE * Vector2.ONE
-		
+	
 	var path = cemetery.nav.get_simple_path(global_position, target_position, false)
 	if path.size() == 2:
 		path.remove(1)
 	path.append(target_position)
 	
-	$UpdateGOTransform/Line2D.points = path
+	if Main.draw_zombie_paths_value:
+		$UpdateGOTransform/Line2D.points = path
+	else:
+		$UpdateGOTransform/Line2D.points = [ ]
+		
 	var direction = (path[1] - path[0]).normalized()
 	character_controller.walk(direction)
 
@@ -40,7 +42,7 @@ func _process(_delta):
 
 func can_see_player():
 	var space_state = get_world_2d().direct_space_state
-	var result_head = space_state.intersect_ray(global_position, player.head_position.global_position, [], go_world.BARRIER_LAYER)
-	var result_mid = space_state.intersect_ray(global_position, player.global_position, [], go_world.BARRIER_LAYER)
-	var result_foot = space_state.intersect_ray(global_position, player.foot_position.global_position, [], go_world.BARRIER_LAYER)
+	var result_head = space_state.intersect_ray(global_position, player.head_position.global_position, [], Main.BARRIER_LAYER)
+	var result_mid = space_state.intersect_ray(global_position, player.global_position, [], Main.BARRIER_LAYER)
+	var result_foot = space_state.intersect_ray(global_position, player.foot_position.global_position, [], Main.BARRIER_LAYER)
 	return result_head.empty() or result_mid.empty() or result_foot.empty()

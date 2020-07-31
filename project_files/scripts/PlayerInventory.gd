@@ -117,4 +117,4 @@ func drop_primary():
 		var temp_primary = primary
 		temp_primary.transform = temp_primary.global_transform
 		set_primary(null)
-		game_object.go_world.call_deferred("add_child", temp_primary)
+		GameWorld.call_deferred("add_child", temp_primary)

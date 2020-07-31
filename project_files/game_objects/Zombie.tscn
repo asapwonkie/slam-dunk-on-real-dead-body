@@ -27,6 +27,7 @@ texture = ExtResource( 2 )
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 1 )
+health = 3
 
 [node name="CharacterController" type="Node" parent="."]
 script = ExtResource( 4 )

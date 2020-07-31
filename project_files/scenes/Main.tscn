@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/GameWorld.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Console.tscn" type="PackedScene" id=2]
+[ext_resource path="res://concept_art/grave_ui.png" type="Texture" id=3]
 [ext_resource path="res://scripts/ShowFPS.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=5]
 
 [node name="Main" type="Node"]
+script = ExtResource( 5 )
 
 [node name="GameWorld" parent="." instance=ExtResource( 1 )]
 
@@ -22,3 +25,28 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GraveImage" type="TextureRect" parent="GUI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = -96.0
+margin_top = -72.0
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/GraveImage"]
+anchor_left = 0.5
+anchor_top = 0.432
+anchor_right = 48.0
+anchor_bottom = 0.767
+margin_left = -30.0
+bbcode_enabled = true
+bbcode_text = "B. Watson"
+text = "B. Watson"

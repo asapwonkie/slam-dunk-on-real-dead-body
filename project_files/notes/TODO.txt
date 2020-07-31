@@ -12,8 +12,9 @@ TODO:
   6) Create UI --> adding powerup/weapon and cash indicators, health
   7) Create/Implement Obituary List from 1947
   8) Implement flashlight reading of gravestones
-  9) Dig Gravestones/Pull Casket
-  10) Implement Ghosts and Zombies
+  9) DONE - Dig Gravestones/Pull Casket
+  10) Implement Ghosts - NOT DONE
+	    and Zombies - DONE
   11) Implement combat
   12) Implement map generation
   13) Implement driving/zombie smashing as a loading screen

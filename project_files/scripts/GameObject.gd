@@ -12,7 +12,8 @@ export(String) var go_type = ""
 # maybe needed if world is deleted and recreated
 #func get_world():
 #	return get_node("/root/Main/World")
-onready var go_world = get_node("/root/Main/GameWorld")
+onready var Main = get_node("/root/Main")
+onready var GameWorld = get_node("/root/Main/GameWorld")
 
 
 
@@ -50,7 +51,6 @@ func get_child_of_type(child_class):
 		for child in node.get_children():
 			queue.push_back(child)
 	
-	assert(false)
 	return null
 
 
@@ -101,5 +101,11 @@ func get_child_of_name(child_name):
 		for child in node.get_children():
 			queue.push_back(child)
 	
-	assert(false)
 	return null
+
+
+
+func set_collisions(value):
+	var collision_shapes = get_children_of_type(CollisionShape2D)
+	for col in collision_shapes:
+		col.disabled = !value

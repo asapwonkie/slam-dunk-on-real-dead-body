@@ -9,5 +9,15 @@ func dig(dig_box: Area2D):
 	
 	if overlapping_areas.size() == 1:
 		var grave = get_game_object(overlapping_areas[0])
-		#print(grave.name)
-		grave.open()
+		grave.toggle_open()
+
+
+
+func swing(melee_area):
+	var overlapping_bodies = melee_area.get_overlapping_bodies()
+	
+	var go
+	for body in overlapping_bodies:
+		go = get_game_object(body)
+		if go is Zombie:
+			go.get_child_of_type(Health).hurt(1)

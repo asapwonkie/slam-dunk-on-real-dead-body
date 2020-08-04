@@ -61,3 +61,9 @@ Soundtrack:
 -big zombies move slowly but kill in one hit. they have high hp.
 -regular zombies move a little faster but have less hp and damage.
 -maybe zombies can hide in the trees
+
+-survival mode as planned (cheats can't be turned on)
+-free mode (w/ cheats + any console commands) where you can build a level yourself and play it
+-maybe when you dig up the boss, all the graves opened spawn zombies
+-flashlight can be put down to stun enemies in its beam until the battery runs out
+-lampposts you can light with matches to slow nearby enemies

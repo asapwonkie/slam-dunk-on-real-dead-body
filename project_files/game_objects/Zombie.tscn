@@ -16,22 +16,27 @@ colors = PoolColorArray( 0.4, 0.501961, 1, 1, 0, 0, 0, 1, 0.713726, 0.219608, 0.
 [node name="Zombie" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-collision_layer = 2
+visible = false
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
-texture = ExtResource( 2 )
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 1 )
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 1 )
-health = 3
 
 [node name="CharacterController" type="Node" parent="."]
 script = ExtResource( 4 )
-walk_speed = 50
+walk_speed = 225
 
 [node name="UpdateGOTransform" type="Node" parent="."]
 script = ExtResource( 5 )

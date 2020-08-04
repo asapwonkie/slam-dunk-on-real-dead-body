@@ -60,6 +60,9 @@ func _ready():
 	commands_list["draw_zombie_paths"] = Command.new()
 	commands_list["draw_zombie_paths"].create("draw_zombie_paths", funcref(main, "draw_zombie_paths"), 1, ["value"])
 	
+	commands_list["give_gun"] = Command.new()
+	commands_list["give_gun"].create("give_gun", funcref(main, "give_gun"), 0)
+	
 	$OutputField.clear()
 
 
@@ -75,6 +78,7 @@ func _input(event):
 		if command_index >= 1:
 			command_index -= 1
 			$InputField.text = entered_commands[command_index]
+			$InputField.caret_position = $InputField.text.length()
 	elif event.is_action_pressed("NextCommand"):
 		if command_index < entered_commands.size():
 			command_index += 1
@@ -82,7 +86,8 @@ func _input(event):
 				$InputField.text = ""
 			else:
 				$InputField.text = entered_commands[command_index-1]
-	elif event.is_action_pressed("Tab"):
+				$InputField.caret_position = $InputField.text.length()
+	elif event.is_action_pressed("Tab") and $InputField.text != "":
 		var keys = commands_list.keys()
 		var matches = [ ]
 		var longest_match = ""
@@ -95,7 +100,8 @@ func _input(event):
 		
 		if matches.size() == 1:
 			$InputField.text = matches[0]
-		else:
+			$InputField.caret_position = $InputField.text.length()
+		elif matches.size() > 1:
 			var index = $InputField.text.length() - 1
 			var current_char = null
 			var least_common_index = 0
@@ -109,10 +115,7 @@ func _input(event):
 						break
 				
 			$InputField.text = longest_match.substr(0, least_common_index)
-		
-	if event.is_action_pressed("Debug"):
-		print(command_index)
-# get least common index
+			$InputField.caret_position = $InputField.text.length()
 
 
 func toggle_console():

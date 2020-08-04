@@ -3,10 +3,13 @@ class_name TileMapScript
 extends TileMap
 
 
+onready var Main = get_node("/root/Main")
+
+
 
 func get_world_transform(pos):
 	var id = get_cellv(pos)
-	var size = tile_set.tile_get_region(id).size / cell_size
+	var size = tile_set.tile_get_region(id).size / Main.CELL_SIZE
 	
 	if !is_cell_transposed(pos.x, pos.y):
 		if !is_cell_y_flipped(pos.x, pos.y):

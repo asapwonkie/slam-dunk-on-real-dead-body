@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/GameWorld.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Console.tscn" type="PackedScene" id=2]
 [ext_resource path="res://concept_art/grave_ui.png" type="Texture" id=3]
 [ext_resource path="res://scripts/ShowFPS.gd" type="Script" id=4]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=5]
+[ext_resource path="res://game_objects/Bullet.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 5 )
@@ -50,3 +51,6 @@ margin_left = -30.0
 bbcode_enabled = true
 bbcode_text = "B. Watson"
 text = "B. Watson"
+
+[node name="Bullet" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1552, -464 )

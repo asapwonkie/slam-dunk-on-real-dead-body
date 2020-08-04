@@ -17,6 +17,7 @@ export(float) var dash_recover_time = 0.5
 
 
 
+var walk_direction = Vector2.ZERO
 var facing_direction = Vector2.ZERO
 var walking = false
 var knock_back_direction = Vector2.ZERO
@@ -60,6 +61,7 @@ func _process(_delta):
 
 
 func _physics_process(_delta):
+	facing_direction = (game_object.get_global_mouse_position() - game_object.global_position).normalized()
 	kinematic_body2D.move_and_slide(get_move_velocity())
 
 
@@ -68,7 +70,7 @@ func get_move_velocity():
 	if !stunned_timer.is_stopped():
 		return knock_back_direction * stunned_speed
 	else:
-		var move_direction = facing_direction
+		var move_direction = walk_direction
 		
 		# if there is a barrier north of you and you are moving up and to the left, just move left
 		if move_direction.x != 0 and move_direction.y != 0 and kinematic_body2D.test_move(kinematic_body2D.global_transform, move_direction):
@@ -131,4 +133,4 @@ func walk(direction: Vector2):
 	walking = false
 	if direction != Vector2.ZERO and !is_dashing():
 		walking = true
-		facing_direction = direction.normalized()
+		walk_direction = direction.normalized()

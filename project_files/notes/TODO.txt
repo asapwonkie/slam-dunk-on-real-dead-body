@@ -21,3 +21,4 @@ TODO:
   14) Create Gas Station/Implement selling/buying system
   15) Create introductory sequence/dialogue
   16) Function that asserts and prints error
+  17) Melee combat

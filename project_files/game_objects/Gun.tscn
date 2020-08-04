@@ -9,11 +9,10 @@ extents = Vector2( 16.9409, 6.7563 )
 
 [node name="Gun" type="Node2D"]
 script = ExtResource( 1 )
-speed = 100.0
 
 [node name="Area2D" type="Area2D" parent="."]
+monitoring = false
 collision_layer = 16
-collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )

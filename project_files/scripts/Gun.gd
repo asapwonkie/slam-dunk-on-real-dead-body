@@ -8,8 +8,8 @@ const BULLET = preload("res://game_objects/Bullet.tscn")
 
 
 
-export(float) var speed = 100
-
+var ammo = 10
+var fire_rate = 0 # rounds per second
 
 
 onready var bullet_holder = GameWorld.get_child_of_name("BulletHolder")
@@ -17,12 +17,19 @@ onready var bullet_holder = GameWorld.get_child_of_name("BulletHolder")
 
 
 func shoot(direction, position = null):
-	var b = BULLET.instance()
-	b.create(direction, speed)
-	
-	if position == null:
-		b.global_position = global_position
-	else:
-		b.global_position = position
+	if ammo > 0:
+		var b = BULLET.instance()
+		b.create(direction)
 		
-	bullet_holder.add_child(b)
+		if position == null:
+			b.global_position = global_position
+		else:
+			b.global_position = position
+			
+		bullet_holder.add_child(b)
+		ammo -= 1
+
+
+
+func stop_shooting():
+	pass

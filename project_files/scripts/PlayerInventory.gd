@@ -46,7 +46,7 @@ func _ready():
 
 func set_primary(go_primary):
 	if go_primary == null:
-		primary.get_parent().call_deferred("remove_child", primary)
+		#primary.get_parent().call_deferred("remove_child", primary)
 		primary = null
 	else:
 		primary = go_primary
@@ -63,7 +63,6 @@ func set_primary(go_primary):
 
 func set_secondary(go_secondary):
 	if go_secondary == null:
-		secondary.get_parent().call_deferred("remove_child", secondary)
 		secondary = null
 	else:
 		secondary = go_secondary
@@ -95,16 +94,20 @@ func switch_to_secondary():
 func pick_up():
 	var overlapping_areas = pickup_area.get_overlapping_areas()
 	var go = null
+	var weapon_equipped = false
 	
 	for area in overlapping_areas:
 		go = get_game_object(area)
-		if go.has_child_of_type(Equippable):
-			if go != primary and go != secondary:
+		if go is Shovel or go is Gun:
+			if !weapon_equipped and go != primary and go != secondary:
+				weapon_equipped = true
 				if primary == null:
 					set_primary(get_game_object(area))
 				elif secondary == null:
 					set_secondary(get_game_object(area))
-				break
+				else:
+					drop_primary()
+					set_primary(get_game_object(area))
 		elif go.go_type == "Gold":
 			go.queue_free()
 			gold += 1
@@ -114,7 +117,7 @@ func pick_up():
 
 func drop_primary():
 	if primary != null:
-		var temp_primary = primary
-		temp_primary.transform = temp_primary.global_transform
+		primary.transform = primary.global_transform
+		primary_position.remove_child(primary)
+		GameWorld.add_child(primary)
 		set_primary(null)
-		GameWorld.call_deferred("add_child", temp_primary)

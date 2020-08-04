@@ -3,13 +3,13 @@ extends Component
 
 
 
-export(int) var health = 100
+export(int) var health = 3
 
 
 
 func hurt(damage: int):
-	health -= damage
-	print(str("Ouch! ", game_object.name, "'s health is now ", health))
-	
-	if health <= 0:
-		get_parent().queue_free()
+	if health > 0:
+		health -= damage
+	if health < 0:
+		health = 0
+	print(str("Ouch. ", game_object.name, "'s health is now ", health))

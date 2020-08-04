@@ -8,6 +8,12 @@ var cemetery
 
 onready var player = get_node("/root/Main/GameWorld/Player")
 onready var character_controller = get_child_of_type(CharacterController)
+onready var hitbox = $Hitbox
+onready var health = $Health
+
+
+var hurt_timer = Timer.new()
+var hurt_wait_time = 1 # seconds
 
 
 
@@ -17,6 +23,12 @@ var target_position = null
 func create(_cemetery):
 	cemetery = _cemetery
 
+
+
+func _ready():
+	hurt_timer.set_wait_time(hurt_wait_time)
+	hurt_timer.set_one_shot(true)
+	add_child(hurt_timer)
 
 
 func _process(_delta):
@@ -37,6 +49,18 @@ func _process(_delta):
 		
 	var direction = (path[1] - path[0]).normalized()
 	character_controller.walk(direction)
+	
+	var overlapping_areas = hitbox.get_overlapping_areas()
+	var go
+	for area in overlapping_areas:
+		go = get_game_object(area)
+		if go is Bullet and go.active:
+			go.active = false
+			go.queue_free()
+			health.hurt(1)
+	
+	if health.health == 0:
+		queue_free()
 
 
 

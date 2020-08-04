@@ -1,5 +1,4 @@
 # UpdateGOTransform.gd
-
 class_name UpdateGOTransform
 extends Component
 
@@ -29,7 +28,7 @@ func _ready():
 func _process(_delta):
 	if Engine.editor_hint:
 		set_node_from()
-	
+
 	if node_from != null:
 		if couple_origin_x:
 			game_object.transform.origin.x = node_from.global_position.x
@@ -46,7 +45,7 @@ func _process(_delta):
 			game_object.transform.x = node_from.transform.x
 		if couple_y_hat:
 			game_object.transform.y = node_from.transform.y
-		
+
 		node_from.transform = Transform2D(0, Vector2.ZERO)
 
 

@@ -4,12 +4,13 @@ extends Component
 
 
 export(int) var health = 3
+export(bool) var invincible = false
 
 
 
 func hurt(damage: int):
-	if health > 0:
-		health -= damage
-	if health < 0:
-		health = 0
-	print(str("Ouch. ", game_object.name, "'s health is now ", health))
+	if !invincible:
+		if health > 0:
+			health -= damage
+		if health < 0:
+			health = 0

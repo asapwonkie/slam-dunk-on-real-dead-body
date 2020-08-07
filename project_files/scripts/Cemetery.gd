@@ -6,7 +6,6 @@ extends GameObject
 
 
 const GRAVE = preload("res://game_objects/Grave.tscn")
-const GRAVE_INDEX = 0
 
 
 
@@ -23,10 +22,9 @@ func _ready():
 
 
 func create():
-	var used_cells_pos = tile_map.get_used_cells()
-	
-	for pos in used_cells_pos:
-		if tile_map.get_cellv(pos) == GRAVE_INDEX:
-			var grave = GRAVE.instance()
-			grave.create(self, pos)
-			grave_holder.add_child(grave)
+	var grave_positions = tile_map.get_used_cells_by_id(main.GRAVE_ID)
+	var grave = null
+	for pos in grave_positions:
+		grave = GRAVE.instance()
+		grave.create(self, pos)
+		grave_holder.add_child(grave)

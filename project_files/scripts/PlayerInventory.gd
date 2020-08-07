@@ -19,6 +19,7 @@ export(NodePath) var secondary_node_path = "" setget set_secondary_node_path
 onready var pickup_area = game_object.get_child_of_name("PickUpArea")
 onready var primary_position = game_object.get_child_of_name("PrimaryPosition")
 onready var secondary_position = game_object.get_child_of_name("SecondaryPosition")
+onready var character_controller = game_object.get_child_of_type(CharacterController)
 
 
 
@@ -54,6 +55,11 @@ func set_primary(go_primary):
 		primary.transform = Transform2D(0, Vector2.ZERO)
 		primary.z_index = 1
 		
+		var rigid_body = primary.get_child_of_type(RigidBody2D)
+		if rigid_body != null:
+			rigid_body.mode = RigidBody2D.MODE_STATIC
+			rigid_body.transform = Transform2D(0, Vector2.ZERO)
+		
 		if go_primary.is_inside_tree():
 			go_primary.get_parent().call_deferred("remove_child", go_primary)
 			
@@ -69,6 +75,11 @@ func set_secondary(go_secondary):
 		
 		secondary.transform = Transform2D(0, Vector2.ZERO)
 		secondary.z_index = -1
+		
+		var rigid_body = primary.get_child_of_type(RigidBody2D)
+		if rigid_body != null:
+			rigid_body.mode = RigidBody2D.MODE_STATIC
+			rigid_body.global_transform = primary.global_transform
 		
 		if go_secondary.is_inside_tree():
 			go_secondary.get_parent().call_deferred("remove_child", go_secondary)
@@ -92,22 +103,23 @@ func switch_to_secondary():
 
 
 func pick_up():
-	var overlapping_areas = pickup_area.get_overlapping_areas()
+	var overlaps = pickup_area.get_overlapping_areas() + pickup_area.get_overlapping_bodies()
 	var go = null
 	var weapon_equipped = false
 	
-	for area in overlapping_areas:
-		go = get_game_object(area)
+	for overlap in overlaps:
+		go = get_game_object(overlap)
 		if go is Shovel or go is Gun:
 			if !weapon_equipped and go != primary and go != secondary:
 				weapon_equipped = true
+				
 				if primary == null:
-					set_primary(get_game_object(area))
+					set_primary(go)
 				elif secondary == null:
-					set_secondary(get_game_object(area))
+					set_secondary(go)
 				else:
 					drop_primary()
-					set_primary(get_game_object(area))
+					set_primary(go)
 		elif go.go_type == "Gold":
 			go.queue_free()
 			gold += 1
@@ -120,4 +132,11 @@ func drop_primary():
 		primary.transform = primary.global_transform
 		primary_position.remove_child(primary)
 		GameWorld.add_child(primary)
+		
+#		primary.set_collisions(true)
+		var rigid_body = primary.get_child_of_type(RigidBody2D)
+		if rigid_body != null:
+			rigid_body.mode = RigidBody2D.MODE_RIGID
+			rigid_body.apply_central_impulse(character_controller.facing_direction * 1000)
+		
 		set_primary(null)

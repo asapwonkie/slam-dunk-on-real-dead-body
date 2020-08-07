@@ -71,7 +71,7 @@ func toggle_open():
 			var flip_y = cemetery.tile_map.get_flip_y(global_transform)
 			var transpose = cemetery.tile_map.get_transposed(global_transform)
 			
-			cemetery.tile_map.set_cell(map_pos.x, map_pos.y, Main.CASKET_INDEX, flip_x, flip_y, transpose)
+			cemetery.tile_map.set_cell(map_pos.x, map_pos.y, main.CASKET_ID, flip_x, flip_y, transpose)
 			
 			if item_id != 0:
 				var drop
@@ -83,7 +83,7 @@ func toggle_open():
 						drop = GUN.instance()
 					
 				drop.transform.origin = cemetery.tile_map.map_to_world(get_spawn_coords())
-				GameWorld.add_game_object(drop)
+				game_world.add_game_object(drop)
 	else:
 		closed = true
 
@@ -96,7 +96,7 @@ func spawn_zombie():
 	
 	#zombie.NAV
 	
-	GameWorld.add_game_object(zombie)
+	game_world.add_game_object(zombie)
 	
 	spawn_zombie_timer.queue_free()
 

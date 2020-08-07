@@ -4,41 +4,39 @@ extends GameObject
 
 
 
-var direction = Vector2.ZERO
-var speed = 800
 var damage = 1
-var active = true
+var direction = Vector2.ZERO
+var speed = 2000
 
 
 
 #onready var hitbox = get_child_of_name("Hitbox")
-onready var timer = Timer.new()
+onready var raycast = $RayCast2D
+#onready var timer = Timer.new()
 
 
 
-func create(_direction):
-	self.direction = _direction.normalized()
-	self.transform = self.transform.rotated(atan2(_direction.y, _direction.x))
-
-
-
-func _ready():
-	timer.set_wait_time(2)
-	timer.set_one_shot(true)
-	add_child(timer)
-	timer.start()
-	timer.connect("timeout", self, "queue_free")
-#	hitbox.connect("body_entered", self, "on_body_enter")
+func fire(position, _direction, _damage):
+	transform = transform.rotated(atan2(_direction.y, _direction.x))
+	global_position = position
+	direction = _direction
+	damage = _damage
 
 
 
 func _process(delta):
-	transform.origin += direction * speed * delta
-
-#func on_body_enter(body):
-#	var go = get_game_object(body)
-#	var health = go.get_child_of_type(Health)
-#	if health != null:
-#		health.hurt(damage)
-#	queue_free()
-#
+	var dx = direction * speed * delta
+	raycast.cast_to = dx
+	raycast.force_raycast_update()
+	if raycast.is_colliding():
+		global_position = raycast.get_collision_point()
+		set_process(false)
+		
+		var go = get_game_object(raycast.get_collider())
+		var health = go.get_child_of_type(Health)
+		if health != null:
+			health.hurt(damage)
+			queue_free()
+			
+	else:
+		global_position += dx

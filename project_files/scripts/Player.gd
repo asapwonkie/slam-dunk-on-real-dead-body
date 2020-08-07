@@ -22,14 +22,6 @@ onready var health = get_child_of_type(Health)
 #		pass
 
 
-
 func _process(_delta):
-	var overlapping_bodies = hitbox.get_overlapping_bodies()
-	var go
-	for body in overlapping_bodies:
-		go = get_game_object(body)
-		if go is Zombie:
-			health.hurt(1)
-	
-	if health.health == 0:
-		Main.restart()
+	if health.health <= 0:
+		main.restart()

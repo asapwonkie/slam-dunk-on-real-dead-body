@@ -6,30 +6,80 @@ extends GameObject
 
 const BULLET = preload("res://game_objects/Bullet.tscn")
 
+enum Type {AK=0, DEAG=1, SHOTGUN=2}
+	
 
+export(Type) var gun_type = Type.AK
+var aim_direction = Vector2.ZERO
+var shooting = false
+var can_shoot = true
 
-var ammo = 10
+var ammo = 0
 var fire_rate = 0 # rounds per second
+var damage = 0
+
+onready var bullet_holder = game_world.get_child_of_name("BulletHolder")
+var timer = Timer.new()
+var rng = RandomNumberGenerator.new()
 
 
-onready var bullet_holder = GameWorld.get_child_of_name("BulletHolder")
+func _ready():
+	rng.randomize()
+	add_child(timer)
+	timer.connect("timeout", self, "timer_timeout")
+	gun_type = rng.randi_range(0, Type.size()-1)
+	print(gun_type)
+	print(Type.AK)
+	set_weapon_properties()
+	
+func set_weapon_properties():
+	if gun_type == Type.AK:
+		ammo = 30
+		fire_rate = 15
+		damage = 1
+	elif gun_type == Type.DEAG:
+		ammo = 12
+		fire_rate = 1.5
+		damage = 3
+	elif gun_type == Type.SHOTGUN:
+		ammo = 12
+		fire_rate = 1.5
+		damage = 3
+		
+	timer.set_wait_time(1.0/fire_rate)
+	timer.set_one_shot(false)
+	
+	
+func aim(direction):
+	aim_direction = direction.normalized()
 
 
 
-func shoot(direction, position = null):
+func shoot_bullet():
 	if ammo > 0:
 		var b = BULLET.instance()
-		b.create(direction)
-		
-		if position == null:
-			b.global_position = global_position
-		else:
-			b.global_position = position
-			
 		bullet_holder.add_child(b)
+		b.fire(global_position, aim_direction, damage)
 		ammo -= 1
+		shooting = true
+		can_shoot = false
+
+
+
+func timer_timeout():
+	can_shoot = true
+	if shooting:
+		shoot_bullet()
+	else:
+		timer.stop()
+
+
+func start_shooting():
+	if can_shoot:
+		shoot_bullet()
+		timer.start()
 
 
 
 func stop_shooting():
-	pass
+	shooting = false

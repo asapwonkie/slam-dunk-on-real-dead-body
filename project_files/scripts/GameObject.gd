@@ -12,8 +12,8 @@ export(String) var go_type = ""
 # maybe needed if world is deleted and recreated
 #func get_world():
 #	return get_node("/root/Main/World")
-onready var Main = get_node("/root/Main")
-onready var GameWorld = get_node("/root/Main/GameWorld")
+onready var main = get_node("/root/Main")
+onready var game_world = get_node("/root/Main/GameWorld")
 
 
 

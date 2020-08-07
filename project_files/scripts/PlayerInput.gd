@@ -32,20 +32,23 @@ func _process(_delta):
 	if Input.is_action_pressed("Dash"): # and stamina >= 20
 		character_controller.dash()
 		
-	if player_inventory.primary != null:
-		if Input.is_action_just_pressed("Attack"):
-			if player_inventory.primary is Shovel:
-				player_inventory.primary.swing(melee_area)
-				character_animation.swing()
-			if player_inventory.primary is Gun:
-				player_inventory.primary.shoot(character_controller.facing_direction, game_object.global_position)
-		elif Input.is_action_just_pressed("Dig"):
-			if player_inventory.primary is Shovel:
-				player_inventory.primary.dig(dig_box)
-				character_animation.dig()
-		elif Input.is_action_just_released("Use"):
-			if player_inventory.primary is Gun:
-				player_inventory.primary.stop_shooting()
+	var just_pressed_attack = Input.is_action_just_pressed("Attack")
+	var just_released_attack = Input.is_action_just_released("Attack")
+	var just_pressed_dig = Input.is_action_just_pressed("Dig")
+		
+	if player_inventory.primary is Shovel:
+		if just_pressed_attack:
+			player_inventory.primary.swing(melee_area)
+			character_animation.swing()
+		elif just_pressed_dig:
+			player_inventory.primary.dig(dig_box)
+			character_animation.dig()
+	elif player_inventory.primary is Gun:
+		player_inventory.primary.aim(character_controller.facing_direction)
+		if just_pressed_attack:
+			player_inventory.primary.start_shooting()
+		elif just_released_attack:
+			player_inventory.primary.stop_shooting()
 		
 	if Input.is_action_just_pressed("EquipSecondary"):
 		player_inventory.switch_to_secondary()

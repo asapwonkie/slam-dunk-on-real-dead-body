@@ -11,13 +11,10 @@ onready var character_controller = get_child_of_type(CharacterController)
 onready var hitbox = $Hitbox
 onready var health = $Health
 
-
-var hurt_timer = Timer.new()
-var hurt_wait_time = 1 # seconds
-
-
+var speed_curve = SmoothCurve.new()
 
 var target_position = null
+
 
 
 func create(_cemetery):
@@ -26,14 +23,15 @@ func create(_cemetery):
 
 
 func _ready():
-	hurt_timer.set_wait_time(hurt_wait_time)
-	hurt_timer.set_one_shot(true)
-	add_child(hurt_timer)
+	speed_curve.create(100, 275, 15, 0.5, 0.34)
 
 
-func _process(_delta):
+func _process(delta):
+	character_controller.walk_speed = speed_curve.get_value()
+	speed_curve.advance(delta)
+	
 	if ( target_position == null
-		 or global_position.distance_to(target_position) <= 0.5 * Main.CELL_SIZE
+		 or global_position.distance_to(target_position) <= main.CELL_SIZE
 		 or can_see_player() ):
 		target_position = player.global_position
 	
@@ -42,7 +40,7 @@ func _process(_delta):
 		path.remove(1)
 	path.append(target_position)
 	
-	if Main.draw_zombie_paths_value:
+	if main.get_draw_zombie_paths():
 		$UpdateGOTransform/Line2D.points = path
 	else:
 		$UpdateGOTransform/Line2D.points = [ ]
@@ -54,9 +52,8 @@ func _process(_delta):
 	var go
 	for area in overlapping_areas:
 		go = get_game_object(area)
-		if go is Bullet and go.active:
-			go.active = false
-			go.queue_free()
+		var health = go.get_child_of_type(Health)
+		if health != null:
 			health.hurt(1)
 	
 	if health.health == 0:
@@ -66,7 +63,7 @@ func _process(_delta):
 
 func can_see_player():
 	var space_state = get_world_2d().direct_space_state
-	var result_head = space_state.intersect_ray(global_position, player.head_position.global_position, [], Main.BARRIER_LAYER)
-	var result_mid = space_state.intersect_ray(global_position, player.global_position, [], Main.BARRIER_LAYER)
-	var result_foot = space_state.intersect_ray(global_position, player.foot_position.global_position, [], Main.BARRIER_LAYER)
+	var result_head = space_state.intersect_ray(global_position, player.head_position.global_position, [], main.BARRIER_LAYER)
+	var result_mid = space_state.intersect_ray(global_position, player.global_position, [], main.BARRIER_LAYER)
+	var result_foot = space_state.intersect_ray(global_position, player.foot_position.global_position, [], main.BARRIER_LAYER)
 	return result_head.empty() or result_mid.empty() or result_foot.empty()

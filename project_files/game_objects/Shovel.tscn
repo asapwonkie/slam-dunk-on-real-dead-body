@@ -11,15 +11,21 @@ extents = Vector2( 20, 5.455 )
 scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 3 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
 collision_layer = 16
-collision_mask = 0
+mode = 1
+gravity_scale = 0.0
+linear_damp = 16.797
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="RigidBody2D"]
 texture = ExtResource( 2 )
 
 [node name="Equippable" type="Node" parent="."]
 script = ExtResource( 4 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )

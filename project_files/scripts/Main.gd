@@ -1,5 +1,5 @@
 # Main.gd
-extends Node
+extends GameObject
 
 const CELL_SIZE = 16
 const PATH_SIZE = 3
@@ -19,21 +19,21 @@ const PLAYER_Z_INDEX = 0
 const GAMEWORLD = preload("res://scenes/GameWorld.tscn")
 const GUN = preload("res://game_objects/Gun.tscn")
 
-onready var game_world = get_node("/root/Main/GameWorld")
-onready var player = get_node("/root/Main/GameWorld/Player")
-onready var console = get_node("/root/Main/GUI/Console")
-onready var fps_label = get_node("/root/Main/GUI/FPSLabel")
+onready var gui = main.get_child_of_type(GUI)
+onready var player = game_world.get_child_of_type(Player)
+#onready var console = gui.get_child_of_type(Console)
+#onready var fps_label = gui.get_child_of_name("FPSLabel")
 
 var _draw_zombie_paths = false
 
 
 func _ready():
 	set_process(false)
-	console.add_command("showfps", funcref(self, "set_showfps"), 1, [funcref(self, "get_showfps")])
-	console.add_command("timescale", funcref(self, "set_timescale"), 1, [funcref(self, "get_timescale")])
-	console.add_command("draw_zombie_paths", funcref(self, "set_draw_zombie_paths"), 1, [funcref(self, "get_draw_zombie_paths")])
-	console.add_command("give_gun", funcref(self, "give_gun"), 0)
-	console.add_command("invincible", funcref(self, "set_invincible"), 1, [funcref(self, "get_invincible")])
+	gui.console.add_command("showfps", funcref(self, "set_showfps"), 1, [funcref(self, "get_showfps")])
+	gui.console.add_command("timescale", funcref(self, "set_timescale"), 1, [funcref(self, "get_timescale")])
+	gui.console.add_command("draw_zombie_paths", funcref(self, "set_draw_zombie_paths"), 1, [funcref(self, "get_draw_zombie_paths")])
+	gui.console.add_command("give_gun", funcref(self, "give_gun"), 0)
+	gui.console.add_command("invincible", funcref(self, "set_invincible"), 1, [funcref(self, "get_invincible")])
 
 
 func _process(_delta):
@@ -57,12 +57,12 @@ func restart():
 
 func set_showfps(value):
 	if value == "0" or value == "1":
-		fps_label.visible = int(value)
+		gui.fps_label_visible = int(value)
 	else:
-		console.print_error("Error: Expected value of 0 or 1.")
+		gui.console.print_error("Error: Expected value of 0 or 1.")
 
 func get_showfps():
-	return fps_label.visible
+	return gui.fps_label.visible
 
 
 
@@ -70,7 +70,7 @@ func set_timescale(value):
 	if float(value) > 0:
 		Engine.time_scale = float(value)
 	else:
-		console.print_error("Error: Expected value greater than 0.")
+		gui.console.print_error("Error: Expected value greater than 0.")
 
 func get_timescale():
 	return Engine.time_scale
@@ -80,7 +80,7 @@ func set_draw_zombie_paths(value):
 	if value == "0" or value == "1":
 		_draw_zombie_paths = int(value)
 	else:
-		console.print_error("Error: Expected value of 0 or 1.")
+		gui.console.print_error("Error: Expected value of 0 or 1.")
 
 func get_draw_zombie_paths():
 	return _draw_zombie_paths
@@ -103,7 +103,7 @@ func set_invincible(value):
 	if value == "0" or value == "1":
 		player.get_child_of_type(Health).invincible = int(value)
 	else:
-		console.print_error("Error: Expected value of 0 or 1.")
+		gui.console.print_error("Error: Expected value of 0 or 1.")
 
 func get_invincible():
 	return player.get_child_of_type(Health).invincible

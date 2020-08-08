@@ -11,7 +11,7 @@ onready var character_controller = get_child_of_type(CharacterController)
 onready var hitbox = $Hitbox
 onready var health = $Health
 
-var speed_curve = SmoothCurve.new()
+var speed_curve = LogisticCurve.new()
 
 var target_position = null
 
@@ -23,12 +23,13 @@ func create(_cemetery):
 
 
 func _ready():
-	speed_curve.create(100, 275, 15, 0.5, 0.34)
+	speed_curve.create(150, 275, 10, 0.5, 0.34)
+	speed_curve.advance(10)
 
 
 func _process(delta):
 	character_controller.walk_speed = speed_curve.get_value()
-	speed_curve.advance(delta)
+	speed_curve.advance(-delta)
 	
 	if ( target_position == null
 		 or global_position.distance_to(target_position) <= main.CELL_SIZE
@@ -41,9 +42,9 @@ func _process(delta):
 	path.append(target_position)
 	
 	if main.get_draw_zombie_paths():
-		$UpdateGOTransform/Line2D.points = path
+		$CharacterController/Line2D.points = path
 	else:
-		$UpdateGOTransform/Line2D.points = [ ]
+		$CharacterController/Line2D.points = [ ]
 		
 	var direction = (path[1] - path[0]).normalized()
 	character_controller.walk(direction)

@@ -1,5 +1,5 @@
-# SmoothCurve.gd
-class_name SmoothCurve
+# LogisticCurve.gd
+class_name LogisticCurve
 
 
 

@@ -1,13 +1,11 @@
 # Console.gd
 class_name Console
-extends Node
+extends GameObject
 
 
 
-onready var main = get_node("/root/Main")
-onready var color_rect = $ColorRect
-onready var output_field = color_rect.get_node("OutputField")
-onready var input_field = color_rect.get_node("InputField")
+onready var output_field = get_child_of_name("OutputField")
+onready var input_field = get_child_of_name("InputField")
 
 
 
@@ -126,12 +124,12 @@ func toggle_console():
 	if open:
 		get_tree().paused = false
 		open = false
-		color_rect.visible = false
+		visible = false
 		input_field.pause_mode = Node.PAUSE_MODE_STOP
 	else:
 		get_tree().paused = true
 		open = true
-		color_rect.visible = true
+		visible = true
 		input_field.pause_mode = Node.PAUSE_MODE_PROCESS
 		input_field.grab_focus()
 

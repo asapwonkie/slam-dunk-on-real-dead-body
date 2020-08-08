@@ -105,7 +105,7 @@ func get_child_of_name(child_name):
 
 
 
-func set_collisions(value):
-	var collision_shapes = get_children_of_type(CollisionShape2D)
-	for col in collision_shapes:
-		col.disabled = !value
+#func set_collisions(value):
+#	var collision_shapes = get_children_of_type(CollisionShape2D)
+#	for col in collision_shapes:
+#		col.disabled = !value

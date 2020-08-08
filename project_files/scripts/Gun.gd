@@ -18,7 +18,7 @@ var ammo = 0
 var fire_rate = 0 # rounds per second
 var damage = 0
 
-onready var bullet_holder = game_world.get_child_of_name("BulletHolder")
+onready var bullet_holder = game_world.bullet_holder
 var timer = Timer.new()
 var rng = RandomNumberGenerator.new()
 
@@ -29,7 +29,6 @@ func _ready():
 	timer.connect("timeout", self, "timer_timeout")
 	gun_type = rng.randi_range(0, Type.size()-1)
 	print(gun_type)
-	print(Type.AK)
 	set_weapon_properties()
 	
 func set_weapon_properties():

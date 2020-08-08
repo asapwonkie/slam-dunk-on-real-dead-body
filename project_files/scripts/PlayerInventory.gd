@@ -131,7 +131,7 @@ func drop_primary():
 	if primary != null:
 		primary.transform = primary.global_transform
 		primary_position.remove_child(primary)
-		GameWorld.add_child(primary)
+		game_world.add_child(primary)
 		
 #		primary.set_collisions(true)
 		var rigid_body = primary.get_child_of_type(RigidBody2D)

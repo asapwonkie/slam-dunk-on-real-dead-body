@@ -1,33 +1,30 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Health.gd" type="Script" id=1]
 [ext_resource path="res://concept_art/zombie.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Zombie.gd" type="Script" id=3]
 [ext_resource path="res://scripts/CharacterController.gd" type="Script" id=4]
-[ext_resource path="res://scripts/UpdateGOTransform.gd" type="Script" id=5]
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 5.47641, 4.99741 )
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5.47641, 4.99741 )
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 14.2074, 12.1949 )
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0, 0.5, 1 )
 colors = PoolColorArray( 0.4, 0.501961, 1, 1, 0, 0, 0, 1, 0.713726, 0.219608, 0.219608, 1 )
 
-[node name="Zombie" type="Node2D"]
+[node name="Zombie" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-collision_layer = 4
-collision_mask = 5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-shape = SubResource( 3 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false
@@ -35,7 +32,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -44,14 +41,10 @@ script = ExtResource( 1 )
 script = ExtResource( 4 )
 walk_speed = 225
 
-[node name="UpdateGOTransform" type="Node" parent="."]
-script = ExtResource( 5 )
-node_from_path = NodePath("../KinematicBody2D")
-
-[node name="Line2D" type="Line2D" parent="UpdateGOTransform"]
+[node name="Line2D" type="Line2D" parent="CharacterController"]
 z_index = 5
 default_color = Color( 0.4, 0.501961, 1, 1 )
-gradient = SubResource( 2 )
+gradient = SubResource( 3 )
 joint_mode = 1
 begin_cap_mode = 1
 end_cap_mode = 1

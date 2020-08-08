@@ -14,11 +14,8 @@ script = ExtResource( 6 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1750, 903.576 )
 
-[node name="PlayerInventory" parent="Player" index="10"]
+[node name="PlayerInventory" parent="Player" index="9"]
 primary_node_path = NodePath("../../../GameWorld/ItemHolder/Shovel")
-
-[node name="UpdateGOTransform" parent="Player" index="12"]
-node_from_path = NodePath("../../../GameWorld/Player/KinematicBody2D")
 
 [node name="GameCamera" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1750, 903.576 )

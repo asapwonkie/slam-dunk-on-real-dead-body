@@ -6,26 +6,24 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 8 )
 
-[node name="Grave" type="Node2D"]
-script = ExtResource( 5 )
-
-[node name="GraveFoot" type="Area2D" parent="."]
+[node name="Grave" type="Area2D"]
 monitoring = false
 collision_layer = 8
 collision_mask = 0
+script = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GraveFoot"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 24, 96 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="GraveFoot"]
+[node name="Sprite" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 48, 96 )
 
-[node name="Sprite2" type="Sprite" parent="GraveFoot"]
+[node name="Sprite2" type="Sprite" parent="."]
 visible = false
 position = Vector2( 8.24518, 88.1876 )
 scale = Vector2( 0.661414, 0.163533 )

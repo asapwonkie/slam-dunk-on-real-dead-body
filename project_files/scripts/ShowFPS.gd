@@ -1,7 +1,5 @@
 # ShowFPS.gd
-
-
-
+class_name ShowFPS
 extends Label
 
 

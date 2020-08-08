@@ -1,11 +1,24 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/Health.gd" type="Script" id=1]
 [ext_resource path="res://concept_art/player/player.png" type="Texture" id=2]
+[ext_resource path="res://animations/idleleftshovelswing.anim" type="Animation" id=3]
 [ext_resource path="res://scripts/CharacterController.gd" type="Script" id=4]
 [ext_resource path="res://scripts/PlayerInput.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=6]
+[ext_resource path="res://animations/idleupshovel.anim" type="Animation" id=7]
+[ext_resource path="res://animations/idleright.anim" type="Animation" id=8]
 [ext_resource path="res://scripts/PlayerInventory.gd" type="Script" id=9]
+[ext_resource path="res://animations/idleleftshoveldig.anim" type="Animation" id=10]
+[ext_resource path="res://animations/idlerightgun.anim" type="Animation" id=11]
+[ext_resource path="res://animations/idlerightshovel.anim" type="Animation" id=12]
+[ext_resource path="res://animations/idleup.anim" type="Animation" id=13]
+[ext_resource path="res://animations/idlerightshoveldig.anim" type="Animation" id=14]
+[ext_resource path="res://animations/idlerightshovelswing.anim" type="Animation" id=15]
+[ext_resource path="res://animations/idleleftgun.anim" type="Animation" id=16]
+[ext_resource path="res://animations/idleleftshovel.anim" type="Animation" id=17]
+[ext_resource path="res://animations/idleleft.anim" type="Animation" id=18]
+[ext_resource path="res://scripts/CharacterAnimation.gd" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.489, 2.583 )
@@ -51,7 +64,7 @@ region_rect = Rect2( 2, 2, 17, 9 )
 [node name="ArmRight" type="Sprite" parent="Skeleton"]
 position = Vector2( -3.974, -9.842 )
 rotation = -1.77151
-scale = Vector2( 0.482, 1 )
+scale = Vector2( 1.066, 1 )
 z_index = 2
 texture = ExtResource( 2 )
 offset = Vector2( -5, 0 )
@@ -83,8 +96,8 @@ region_enabled = true
 region_rect = Rect2( 13, 21, 1, 10 )
 
 [node name="PrimaryPosition" type="Position2D" parent="Skeleton"]
-position = Vector2( -2.132, -4.501 )
-scale = Vector2( -1, 1 )
+position = Vector2( 0, -0.807 )
+rotation = 2.50629
 z_index = 2
 __meta__ = {
 "_gizmo_extents_": 3.0
@@ -155,3 +168,21 @@ script = ExtResource( 4 )
 
 [node name="PlayerInventory" type="Node" parent="."]
 script = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 4.0
+anims/idleleft = ExtResource( 18 )
+anims/idleleftgun = ExtResource( 16 )
+anims/idleleftshovel = ExtResource( 17 )
+anims/idleleftshoveldig = ExtResource( 10 )
+anims/idleleftshovelswing = ExtResource( 3 )
+anims/idleright = ExtResource( 8 )
+anims/idlerightgun = ExtResource( 11 )
+anims/idlerightshovel = ExtResource( 12 )
+anims/idlerightshoveldig = ExtResource( 14 )
+anims/idlerightshovelswing = ExtResource( 15 )
+anims/idleup = ExtResource( 13 )
+anims/idleupshovel = ExtResource( 7 )
+
+[node name="CharacterAnimation" type="Node" parent="."]
+script = ExtResource( 19 )

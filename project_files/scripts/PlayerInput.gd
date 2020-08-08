@@ -11,7 +11,7 @@ onready var character_controller = game_object.get_child_of_type(CharacterContro
 onready var dig_box = game_object.get_child_of_name("DigBox")
 onready var player_inventory = game_object.get_child_of_type(PlayerInventory)
 onready var melee_area = game_object.get_child_of_name("MeleeArea")
-#onready var character_animation = game_object.get_component_of_type(CharacterAnimation)
+onready var character_animation = game_object.get_child_of_type(CharacterAnimation)
 onready var gui = main.get_child_of_type(GUI)
 
 
@@ -39,10 +39,10 @@ func _process(_delta):
 	if player_inventory.primary is Shovel:
 		if just_pressed_attack:
 			player_inventory.primary.swing(melee_area)
-			#character_animation.swing()
+			character_animation.swing()
 		elif just_pressed_dig:
 			player_inventory.primary.dig(dig_box)
-			#character_animation.dig()
+			character_animation.dig()
 	elif player_inventory.primary is Gun:
 		player_inventory.primary.aim(character_controller.facing_direction)
 		if just_pressed_attack:

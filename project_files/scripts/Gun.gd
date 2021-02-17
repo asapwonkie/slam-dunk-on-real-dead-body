@@ -28,7 +28,6 @@ func _ready():
 	add_child(timer)
 	timer.connect("timeout", self, "timer_timeout")
 	gun_type = rng.randi_range(0, Type.size()-1)
-	print(gun_type)
 	set_weapon_properties()
 	
 func set_weapon_properties():

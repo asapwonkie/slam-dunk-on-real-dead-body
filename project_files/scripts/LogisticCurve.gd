@@ -18,9 +18,10 @@ var x = 0
 
 
 
-func create(_initial_value, _final_value, _final_x, _midpoint, _steepness):
+func create(_initial_value, _final_value, _initial_x, _final_x, _midpoint, _steepness):
 	initial_value = _initial_value
 	final_value = _final_value - _initial_value
+	x = _initial_x
 	final_x = _final_x
 	midpoint = _midpoint
 	steepness = _steepness

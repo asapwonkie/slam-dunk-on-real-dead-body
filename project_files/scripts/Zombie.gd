@@ -10,6 +10,7 @@ onready var player = get_node("/root/Main/GameWorld/Player")
 onready var character_controller = get_child_of_type(CharacterController)
 onready var hitbox = $Hitbox
 onready var health = $Health
+onready var inventory = $Inventory
 
 var speed_curve = LogisticCurve.new()
 
@@ -23,7 +24,7 @@ func create(_cemetery):
 
 
 func _ready():
-	speed_curve.create(150, 275, 10, 0.5, 0.34)
+	speed_curve.create(150, 275, 0, 10, 0.5, 0.34)
 	speed_curve.advance(10)
 
 
@@ -31,10 +32,19 @@ func _process(delta):
 	character_controller.walk_speed = speed_curve.get_value()
 	speed_curve.advance(-delta)
 	
+	var saw_player = false
+	
+	if can_see_player():
+		saw_player = true
+	
 	if ( target_position == null
 		 or global_position.distance_to(target_position) <= main.CELL_SIZE
-		 or can_see_player() ):
+		 or saw_player ):
 		target_position = player.global_position
+		
+	if saw_player and inventory.primary is Gun:
+		inventory.primary.aim(target_position - global_position)
+		inventory.primary.shoot_bullet()
 	
 	var path = cemetery.nav.get_simple_path(global_position, target_position, false)
 	if path.size() == 2:

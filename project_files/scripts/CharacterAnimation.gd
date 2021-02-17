@@ -32,7 +32,7 @@ onready var sprite = game_object.get_child_of_name("CharacterSprite")
 onready var animation_player = game_object.get_child_of_type(AnimationPlayer)
 onready var kinematic_body2D = game_object.get_child_of_type(KinematicBody2D)
 onready var character_controller = game_object.get_child_of_type(CharacterController)
-onready var player_inventory = game_object.get_child_of_type(PlayerInventory)
+onready var inventory = game_object.get_child_of_type(Inventory)
 
 
 func _ready():
@@ -50,19 +50,19 @@ func _process(_delta):
 		elif card_dir == "left":
 			facing_direction = "left"
 			
-		if player_inventory.primary == null:
+		if inventory.primary == null:
 			animation_player.play(str("idle", facing_direction))
-		elif player_inventory.primary is Shovel:
+		elif inventory.primary is Shovel:
 			animation_player.play(str("idle", facing_direction, "shovel"))
-		elif player_inventory.primary is Gun:
+		elif inventory.primary is Gun:
 			animation_player.play(str("idle", facing_direction, "gun"))
 
 #	if character_controller.walking:
-#		if animation_player.current_animation != str("walk", animation_direction):
-#			animation_player.play(str("walk", animation_direction))
+#		if animation_player.current_animation != str("walk", facing_direction):
+#			animation_player.play(str("walk", facing_direction))
 #	else:
-#		if animation_player.current_animation != str("idle", animation_direction):
-#			animation_player.play(str("idle", animation_direction))
+#		if animation_player.current_animation != str("idle", facing_direction):
+#			animation_player.play(str("idle", facing_direction))
 
 
 

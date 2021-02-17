@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scripts/Health.gd" type="Script" id=1]
 [ext_resource path="res://concept_art/player/player.png" type="Texture" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://scripts/Player.gd" type="Script" id=6]
 [ext_resource path="res://animations/idleupshovel.anim" type="Animation" id=7]
 [ext_resource path="res://animations/idleright.anim" type="Animation" id=8]
-[ext_resource path="res://scripts/PlayerInventory.gd" type="Script" id=9]
+[ext_resource path="res://scripts/Inventory.gd" type="Script" id=9]
 [ext_resource path="res://animations/idleleftshoveldig.anim" type="Animation" id=10]
 [ext_resource path="res://animations/idlerightgun.anim" type="Animation" id=11]
 [ext_resource path="res://animations/idlerightshovel.anim" type="Animation" id=12]
@@ -19,6 +19,8 @@
 [ext_resource path="res://animations/idleleftshovel.anim" type="Animation" id=17]
 [ext_resource path="res://animations/idleleft.anim" type="Animation" id=18]
 [ext_resource path="res://scripts/CharacterAnimation.gd" type="Script" id=19]
+[ext_resource path="res://concept_art/zombie.png" type="Texture" id=20]
+[ext_resource path="res://game_objects/Shovel.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.489, 2.583 )
@@ -32,8 +34,35 @@ extents = Vector2( 11.85, 17.886 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 11.183, 12.583 )
 
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform float final_sundown_time;
+uniform float final_circle_time;
+uniform float current_time;
+
+void fragment() {
+	COLOR = vec4(0.0, 0.0, 0.0, 0.6 * clamp(current_time/final_sundown_time, 0, 1));
+	
+	float radius = sqrt( pow(1.68 * UV.x - 0.84, 2) + pow(UV.y - 0.5, 2) );
+	if (current_time >= final_circle_time) {
+		if (radius > 0.25) {
+			COLOR = vec4(0.0, 0.0, 0.0, log(0.74182 * radius + 0.75) + 0.6);
+		}
+	} else if (current_time > final_sundown_time) {
+		if (radius > (0.25-1.0)/(final_circle_time-final_sundown_time) * (current_time-final_sundown_time) + 1.0) {
+			COLOR = vec4(0.0, 0.0, 0.0, log(0.74182 * radius + 0.75) + 0.6);
+		}
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/final_sundown_time = null
+shader_param/final_circle_time = null
+shader_param/current_time = null
+
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 0, -0.993 )
 collision_layer = 2
 script = ExtResource( 6 )
 
@@ -63,8 +92,7 @@ region_rect = Rect2( 2, 2, 17, 9 )
 
 [node name="ArmRight" type="Sprite" parent="Skeleton"]
 position = Vector2( -3.974, -9.842 )
-rotation = -1.77151
-scale = Vector2( 1.066, 1 )
+rotation = -1.3282
 z_index = 2
 texture = ExtResource( 2 )
 offset = Vector2( -5, 0 )
@@ -73,8 +101,7 @@ region_rect = Rect2( 13, 18, 10, 1 )
 
 [node name="ArmLeft" type="Sprite" parent="Skeleton"]
 position = Vector2( 3.932, -9.842 )
-rotation = 0.774926
-scale = Vector2( 0.604, 1 )
+rotation = 1.3282
 z_index = 2
 texture = ExtResource( 2 )
 offset = Vector2( 5, 0 )
@@ -97,11 +124,13 @@ region_rect = Rect2( 13, 21, 1, 10 )
 
 [node name="PrimaryPosition" type="Position2D" parent="Skeleton"]
 position = Vector2( 0, -0.807 )
-rotation = 2.50629
+rotation = 2.38237
 z_index = 2
 __meta__ = {
 "_gizmo_extents_": 3.0
 }
+
+[node name="Shovel" parent="Skeleton/PrimaryPosition" instance=ExtResource( 21 )]
 
 [node name="SecondaryPosition" type="Position2D" parent="Skeleton"]
 position = Vector2( 0, -11.027 )
@@ -149,7 +178,7 @@ collision_mask = 8
 shape = SubResource( 1 )
 
 [node name="MeleeArea" type="Area2D" parent="."]
-position = Vector2( -9.174, -15.705 )
+position = Vector2( 9.174, -15.705 )
 monitorable = false
 collision_layer = 0
 collision_mask = 4
@@ -165,9 +194,11 @@ script = ExtResource( 5 )
 
 [node name="CharacterController" type="Node" parent="."]
 script = ExtResource( 4 )
+aim_position_path = NodePath("../Skeleton/PrimaryPosition")
 
-[node name="PlayerInventory" type="Node" parent="."]
+[node name="Inventory" type="Node" parent="."]
 script = ExtResource( 9 )
+primary_node_path = NodePath("../Skeleton/PrimaryPosition/Shovel")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
@@ -186,3 +217,9 @@ anims/idleupshovel = ExtResource( 7 )
 
 [node name="CharacterAnimation" type="Node" parent="."]
 script = ExtResource( 19 )
+
+[node name="Sundown" type="Sprite" parent="."]
+material = SubResource( 6 )
+scale = Vector2( 32, 19 )
+z_index = 10
+texture = ExtResource( 20 )

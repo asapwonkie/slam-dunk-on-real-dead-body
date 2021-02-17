@@ -67,3 +67,5 @@ Soundtrack:
 -maybe when you dig up the boss, all the graves opened spawn zombies
 -flashlight can be put down to stun enemies in its beam until the battery runs out
 -lampposts you can light with matches to slow nearby enemies
+
+-what if there are big enemies that take up almost 2 spaces and they move very quickly but they are locked to one direction and change direction when they collide with something

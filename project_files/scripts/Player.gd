@@ -14,6 +14,8 @@ onready var foot_position = get_child_of_name("FootPosition")
 onready var hitbox = get_child_of_name("Hitbox")
 onready var health = get_child_of_type(Health)
 
+onready var sundown = get_child_of_name("Sundown")
+var time = 0
 
 #func set_noclip(value):
 #	if value == true:
@@ -21,7 +23,14 @@ onready var health = get_child_of_type(Health)
 #	else:
 #		pass
 
+func _ready():
+	sundown.material.set_shader_param("final_sundown_time", 5)
+	sundown.material.set_shader_param("final_circle_time", 10)
 
-func _process(_delta):
+
+func _process(delta):
 	if health.health <= 0:
 		main.restart()
+		
+	time += delta
+	sundown.material.set_shader_param("current_time", time)

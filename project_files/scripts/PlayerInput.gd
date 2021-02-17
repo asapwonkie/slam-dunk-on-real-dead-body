@@ -9,10 +9,11 @@ extends Component
 
 onready var character_controller = game_object.get_child_of_type(CharacterController)
 onready var dig_box = game_object.get_child_of_name("DigBox")
-onready var player_inventory = game_object.get_child_of_type(PlayerInventory)
+onready var player_inventory = game_object.get_child_of_type(Inventory)
 onready var melee_area = game_object.get_child_of_name("MeleeArea")
 onready var character_animation = game_object.get_child_of_type(CharacterAnimation)
 onready var gui = main.get_child_of_type(GUI)
+#onready var trajectory = game_object.get_child_of_type(Trajectory)
 
 
 
@@ -32,6 +33,9 @@ func _process(_delta):
 	if Input.is_action_pressed("Dash"): # and stamina >= 20
 		character_controller.dash()
 		
+	var aim_direction = character_controller.facing_direction
+	#trajectory.set_angle(atan2(aim_direction.y, aim_direction.x))
+		
 	var just_pressed_attack = Input.is_action_just_pressed("Attack")
 	var just_released_attack = Input.is_action_just_released("Attack")
 	var just_pressed_dig = Input.is_action_just_pressed("Dig")
@@ -44,7 +48,7 @@ func _process(_delta):
 			player_inventory.primary.dig(dig_box)
 			character_animation.dig()
 	elif player_inventory.primary is Gun:
-		player_inventory.primary.aim(character_controller.facing_direction)
+		player_inventory.primary.aim(aim_direction)
 		if just_pressed_attack:
 			player_inventory.primary.start_shooting()
 		elif just_released_attack:
@@ -62,5 +66,4 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ShowGraveImage"):
 		var overlapping_areas = dig_box.get_overlapping_areas()
 		if overlapping_areas.size() >= 1:
-			#var grave = get_game_object(dig_box.get_overlapping_areas()[0])
 			gui.grave_image_visible = true

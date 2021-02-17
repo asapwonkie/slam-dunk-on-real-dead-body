@@ -1,5 +1,5 @@
-# PlayerInventory.gd
-class_name PlayerInventory
+# Inventory.gd
+class_name Inventory
 extends Component
 
 
@@ -120,7 +120,7 @@ func pick_up():
 				else:
 					drop_primary()
 					set_primary(go)
-		elif go.go_type == "Gold":
+		elif go is Gold:
 			go.queue_free()
 			gold += 1
 			print(str("Gold = ", gold))
@@ -137,6 +137,6 @@ func drop_primary():
 		var rigid_body = primary.get_child_of_type(RigidBody2D)
 		if rigid_body != null:
 			rigid_body.mode = RigidBody2D.MODE_RIGID
-			rigid_body.apply_central_impulse(character_controller.facing_direction * 1000)
+			rigid_body.apply_impulse(Vector2(1, 0), character_controller.velocity * 4 + character_controller.facing_direction * 1000)
 		
 		set_primary(null)

@@ -87,7 +87,7 @@ func get_draw_zombie_paths():
 
 
 func give_gun():
-	var player_inventory = player.get_child_of_type(PlayerInventory)
+	var player_inventory = player.get_child_of_type(Inventory)
 	var gun = GUN.instance()
 	
 	if player_inventory.primary == null:

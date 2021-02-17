@@ -21,10 +21,11 @@ func dig(dig_box: Area2D):
 
 
 func swing(melee_area: Area2D):
-	var overlapping_bodies = melee_area.get_overlapping_bodies()
+	var overlapping_areas = melee_area.get_overlapping_areas()
 	
 	var go
-	for body in overlapping_bodies:
-		go = get_game_object(body)
+	for area in overlapping_areas:
+		go = get_game_object(area)
 		if go is Zombie:
 			go.get_child_of_type(Health).hurt(1)
+			print("hit")

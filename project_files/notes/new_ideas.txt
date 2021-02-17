@@ -1,0 +1,10 @@
+The terrain is one big island with trees, structures, and graves scattered about. Mobs will fight you during
+the day as you loot structures and search for dungeons. Entering a grave sends you into the underworld where
+you can fight your way through a dungeon to defeat a boss and steal their power. During the night, an
+amalgamation of all the bosses you've killed launches an assault of mobs on you that you must defeat. 
+
+TODO:
+ - Randomly generate the map
+ - Randomly generate a dungeon
+ - Design enemy types
+ - Implement combat

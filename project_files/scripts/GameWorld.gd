@@ -4,9 +4,9 @@ extends GameObject
 
 
 
-onready var zombie_holder = get_node("ZombieHolder")
-onready var item_holder = get_node("ItemHolder")
-onready var bullet_holder = get_node("BulletHolder")
+@onready var zombie_holder = get_node("ZombieHolder")
+@onready var item_holder = get_node("ItemHolder")
+@onready var bullet_holder = get_node("BulletHolder")
 
 
 

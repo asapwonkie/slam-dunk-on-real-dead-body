@@ -1,31 +1,31 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Health.gd" type="Script" id=1]
-[ext_resource path="res://concept_art/zombie.png" type="Texture" id=2]
+[ext_resource path="res://concept_art/zombie.png" type="Texture2D" id=2]
 [ext_resource path="res://scripts/Zombie.gd" type="Script" id=3]
 [ext_resource path="res://scripts/CharacterController.gd" type="Script" id=4]
 [ext_resource path="res://scripts/Inventory.gd" type="Script" id=5]
 [ext_resource path="res://game_objects/Gun.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5.47641, 4.99741 )
+size = Vector2( 5.47641, 4.99741 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 14.2074, 12.1949 )
+size = Vector2( 14.2074, 12.1949 )
 
 [sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0, 0.5, 1 )
-colors = PoolColorArray( 0.4, 0.501961, 1, 1, 0, 0, 0, 1, 0.713726, 0.219608, 0.219608, 1 )
+offsets = PackedFloat32Array( 0, 0.5, 1 )
+colors = PackedColorArray( 0.4, 0.501961, 1, 1, 0, 0, 0, 1, 0.713726, 0.219608, 0.219608, 1 )
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 16.0196
 
-[node name="Zombie" type="KinematicBody2D"]
+[node name="Zombie" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -59,11 +59,11 @@ end_cap_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpArea"]
 shape = SubResource( 4 )
 
-[node name="PrimaryPosition" type="Position2D" parent="."]
+[node name="PrimaryPosition" type="Marker2D" parent="."]
 
 [node name="Gun" parent="PrimaryPosition" instance=ExtResource( 6 )]
 
-[node name="SecondaryPosition" type="Position2D" parent="."]
+[node name="SecondaryPosition" type="Marker2D" parent="."]
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource( 5 )

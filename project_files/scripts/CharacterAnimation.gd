@@ -6,7 +6,7 @@ extends Component
 
 # this component requires:
 #	- Sprite
-#	- KinematicBody2D
+#	- CharacterBody2D
 #	- CharacterController
 
 
@@ -28,16 +28,16 @@ var injected_anim = ""
 var playing_injected_anim = false
 
 
-onready var sprite = game_object.get_child_of_name("CharacterSprite")
-onready var animation_player = game_object.get_child_of_type(AnimationPlayer)
-onready var kinematic_body2D = game_object.get_child_of_type(KinematicBody2D)
-onready var character_controller = game_object.get_child_of_type(CharacterController)
-onready var inventory = game_object.get_child_of_type(Inventory)
+@onready var sprite = game_object.get_child_of_name("CharacterSprite")
+@onready var animation_player = game_object.get_child_of_type(AnimationPlayer)
+@onready var character_body2D = game_object.get_child_of_type(CharacterBody2D)
+@onready var character_controller = game_object.get_child_of_type(CharacterController)
+@onready var inventory = game_object.get_child_of_type(Inventory)
 
 
 func _ready():
 	animation_player.play("idleright")
-	animation_player.connect("animation_finished", self, "animation_finished")
+	animation_player.connect("animation_finished", Callable(self, "animation_finished"))
 
 
 

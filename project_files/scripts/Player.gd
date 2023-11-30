@@ -5,16 +5,16 @@ extends GameObject
 
 
 
-onready var kinematic_body_2D = get_child_of_type(KinematicBody2D)
+@onready var kinematic_body_2D = get_child_of_type(CharacterBody2D)
 
 
-onready var head_position = get_child_of_name("HeadPosition")
-onready var foot_position = get_child_of_name("FootPosition")
+@onready var head_position = get_child_of_name("HeadPosition")
+@onready var foot_position = get_child_of_name("FootPosition")
 
-onready var hitbox = get_child_of_name("Hitbox")
-onready var health = get_child_of_type(Health)
+@onready var hitbox = get_child_of_name("Hitbox")
+@onready var health = get_child_of_type(Health)
 
-onready var sundown = get_child_of_name("Sundown")
+@onready var sundown = get_child_of_name("Sundown")
 var time = 0
 
 #func set_noclip(value):
@@ -24,8 +24,8 @@ var time = 0
 #		pass
 
 func _ready():
-	sundown.material.set_shader_param("final_sundown_time", 5)
-	sundown.material.set_shader_param("final_circle_time", 10)
+	sundown.material.set_shader_parameter("final_sundown_time", 5)
+	sundown.material.set_shader_parameter("final_circle_time", 10)
 
 
 func _process(delta):
@@ -33,4 +33,4 @@ func _process(delta):
 		main.restart()
 		
 	time += delta
-	sundown.material.set_shader_param("current_time", time)
+	sundown.material.set_shader_parameter("current_time", time)

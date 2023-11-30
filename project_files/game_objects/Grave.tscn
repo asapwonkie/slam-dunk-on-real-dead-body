@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://tile_art/cemetery_tiles_prototype.png" type="Texture" id=1]
+[ext_resource path="res://tile_art/cemetery_tiles_prototype.png" type="Texture2D" id=1]
 [ext_resource path="res://scripts/Grave.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 8 )
+size = Vector2( 16, 8 )
 
 [node name="Grave" type="Area2D"]
 monitoring = false
@@ -16,14 +16,14 @@ script = ExtResource( 5 )
 position = Vector2( 24, 96 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 48, 96 )
 
-[node name="Sprite2" type="Sprite" parent="."]
+[node name="Sprite2" type="Sprite2D" parent="."]
 visible = false
 position = Vector2( 8.24518, 88.1876 )
 scale = Vector2( 0.661414, 0.163533 )

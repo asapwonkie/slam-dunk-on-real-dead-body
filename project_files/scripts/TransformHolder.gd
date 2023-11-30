@@ -1,6 +1,6 @@
+@tool
 # TransformHolder.gd
 
-tool
 
 class_name TransformHolder
 extends Node

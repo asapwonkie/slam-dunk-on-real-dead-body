@@ -1,6 +1,6 @@
+@tool
 # TransformCoupling.gd
 
-tool
 
 class_name TransformCoupling
 extends Node
@@ -13,28 +13,28 @@ var offsets = [ null, null, null, null ]
 
 
 
-export(NodePath) var transform_holder_leader_path = NodePath() setget set_transform_holder_leader_path
+@export var transform_holder_leader_path: NodePath = NodePath(): set = set_transform_holder_leader_path
 
-export(NodePath) var transform_holder_follower_path_0 = NodePath() setget set_transform_holder_follower_path_0
-export(Vector2) var offset_0 = Vector2.ZERO
+@export var transform_holder_follower_path_0: NodePath = NodePath(): set = set_transform_holder_follower_path_0
+@export var offset_0: Vector2 = Vector2.ZERO
 
-export(NodePath) var transform_holder_follower_path_1 = NodePath() setget set_transform_holder_follower_path_1
-export(Vector2) var offset_1 = Vector2.ZERO
+@export var transform_holder_follower_path_1: NodePath = NodePath(): set = set_transform_holder_follower_path_1
+@export var offset_1: Vector2 = Vector2.ZERO
 
-export(NodePath) var transform_holder_follower_path_2 = NodePath() setget set_transform_holder_follower_path_2
-export(Vector2) var offset_2 = Vector2.ZERO
+@export var transform_holder_follower_path_2: NodePath = NodePath(): set = set_transform_holder_follower_path_2
+@export var offset_2: Vector2 = Vector2.ZERO
 
-export(NodePath) var transform_holder_follower_path_3 = NodePath() setget set_transform_holder_follower_path_3
-export(Vector2) var offset_3 = Vector2.ZERO
+@export var transform_holder_follower_path_3: NodePath = NodePath(): set = set_transform_holder_follower_path_3
+@export var offset_3: Vector2 = Vector2.ZERO
 
 
-export(bool) var couple_origin_x = true
-export(bool) var couple_origin_y = true
-export(bool) var couple_rotation = true # measured CCW from +x axis
-export(bool) var couple_scale_x = true
-export(bool) var couple_scale_y = true
-export(bool) var couple_x_hat = true
-export(bool) var couple_y_hat = true
+@export var couple_origin_x: bool = true
+@export var couple_origin_y: bool = true
+@export var couple_rotation: bool = true # measured CCW from +x axis
+@export var couple_scale_x: bool = true
+@export var couple_scale_y: bool = true
+@export var couple_x_hat: bool = true
+@export var couple_y_hat: bool = true
 
 
 
@@ -50,7 +50,7 @@ func _ready():
 
 
 func _process(_delta):
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		set_transforms()
 		
 	if transform_holder_leader != null:
@@ -77,48 +77,48 @@ func _process(_delta):
 
 
 func set_transforms():
-	if transform_holder_leader == null and transform_holder_leader_path != "":
+	if transform_holder_leader == null and !transform_holder_leader_path.is_empty():
 		transform_holder_leader = get_node(transform_holder_leader_path)
-	if transform_holder_followers[0] == null and transform_holder_follower_path_0 != "":
+	if transform_holder_followers[0] == null and !transform_holder_follower_path_0.is_empty():
 		transform_holder_followers[0] = get_node(transform_holder_follower_path_0)
-	if transform_holder_followers[1] == null and transform_holder_follower_path_1 != "":
+	if transform_holder_followers[1] == null and !transform_holder_follower_path_1.is_empty():
 		transform_holder_followers[1] = get_node(transform_holder_follower_path_1)
-	if transform_holder_followers[2] == null and transform_holder_follower_path_2 != "":
+	if transform_holder_followers[2] == null and !transform_holder_follower_path_2.is_empty():
 		transform_holder_followers[2] = get_node(transform_holder_follower_path_2)
-	if transform_holder_followers[3] == null and transform_holder_follower_path_3 != "":
+	if transform_holder_followers[3] == null and !transform_holder_follower_path_3.is_empty():
 		transform_holder_followers[3] = get_node(transform_holder_follower_path_3)
 
 
 
 func set_transform_holder_leader_path(path: NodePath) -> void:
 	transform_holder_leader_path = path
-	if path == "":
+	if path.is_empty():
 		transform_holder_leader = null
 
 
 
 func set_transform_holder_follower_path_0(path: NodePath) -> void:
 	transform_holder_follower_path_0 = path
-	if path == "":
+	if path.is_empty():
 		transform_holder_followers[0] = null
 
 
 
 func set_transform_holder_follower_path_1(path: NodePath) -> void:
 	transform_holder_follower_path_1 = path
-	if path == "":
+	if path.is_empty():
 		transform_holder_followers[1] = null
 
 
 
 func set_transform_holder_follower_path_2(path: NodePath) -> void:
 	transform_holder_follower_path_2 = path
-	if path == "":
+	if path.is_empty():
 		transform_holder_followers[2] = null
 
 
 
 func set_transform_holder_follower_path_3(path: NodePath) -> void:
 	transform_holder_follower_path_3 = path
-	if path == "":
+	if path.is_empty():
 		transform_holder_followers[3] = null

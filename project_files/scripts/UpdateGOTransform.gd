@@ -7,18 +7,18 @@ extends Component
 
 
 
-export(NodePath) var node_from_path = NodePath() setget set_node_from_path
+@export var node_from_path: NodePath = NodePath(): set = set_node_from_path
 var node_from = null
 
-export(bool) var enabled = true
+@export var enabled: bool = true
 
-export(bool) var couple_origin_x = true
-export(bool) var couple_origin_y = true
-export(bool) var couple_rotation = true # measured CCW from +x axis
-export(bool) var couple_scale_x = true
-export(bool) var couple_scale_y = true
-export(bool) var couple_x_hat = true
-export(bool) var couple_y_hat = true
+@export var couple_origin_x: bool = true
+@export var couple_origin_y: bool = true
+@export var couple_rotation: bool = true # measured CCW from +x axis
+@export var couple_scale_x: bool = true
+@export var couple_scale_y: bool = true
+@export var couple_x_hat: bool = true
+@export var couple_y_hat: bool = true
 
 
 
@@ -35,7 +35,7 @@ func _process(_delta):
 		print(node_from.global_position)
 	
 	if enabled:
-		if Engine.editor_hint:
+		if Engine.is_editor_hint():
 			set_node_from()
 	
 		if node_from != null:

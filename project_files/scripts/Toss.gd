@@ -4,7 +4,7 @@ extends Component
 
 
 
-onready var timer = Timer.new()
+@onready var timer = Timer.new()
 
 
 

@@ -9,7 +9,7 @@ const BULLET = preload("res://game_objects/Bullet.tscn")
 enum Type {AK=0, DEAG=1, SHOTGUN=2}
 	
 
-export(Type) var gun_type = Type.AK
+@export var gun_type: Type = Type.AK
 var aim_direction = Vector2.ZERO
 var shooting = false
 var can_shoot = true
@@ -18,7 +18,7 @@ var ammo = 0
 var fire_rate = 0 # rounds per second
 var damage = 0
 
-onready var bullet_holder = game_world.bullet_holder
+@onready var bullet_holder = game_world.bullet_holder
 var timer = Timer.new()
 var rng = RandomNumberGenerator.new()
 
@@ -26,8 +26,8 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	rng.randomize()
 	add_child(timer)
-	timer.connect("timeout", self, "timer_timeout")
-	gun_type = rng.randi_range(0, Type.size()-1)
+	timer.connect("timeout", Callable(self, "timer_timeout"))
+	gun_type = rng.randi_range(0, Type.size()-1) as Type
 	set_weapon_properties()
 	
 func set_weapon_properties():
@@ -55,7 +55,7 @@ func aim(direction):
 
 func shoot_bullet():
 	if ammo > 0:
-		var b = BULLET.instance()
+		var b = BULLET.instantiate()
 		bullet_holder.add_child(b)
 		b.fire(global_position, aim_direction, damage)
 		ammo -= 1

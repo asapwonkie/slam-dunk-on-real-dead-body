@@ -7,12 +7,12 @@ extends Component
 
 
 
-onready var character_controller = game_object.get_child_of_type(CharacterController)
-onready var dig_box = game_object.get_child_of_name("DigBox")
-onready var player_inventory = game_object.get_child_of_type(Inventory)
-onready var melee_area = game_object.get_child_of_name("MeleeArea")
-onready var character_animation = game_object.get_child_of_type(CharacterAnimation)
-onready var gui = main.get_child_of_type(GUI)
+@onready var character_controller = game_object.get_child_of_type(CharacterController)
+@onready var dig_box = game_object.get_child_of_name("DigBox")
+@onready var player_inventory = game_object.get_child_of_type(Inventory)
+@onready var melee_area = game_object.get_child_of_name("MeleeArea")
+@onready var character_animation = game_object.get_child_of_type(CharacterAnimation)
+@onready var gui = main.get_child_of_type(GUI)
 #onready var trajectory = game_object.get_child_of_type(Trajectory)
 
 

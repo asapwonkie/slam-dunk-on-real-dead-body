@@ -25,8 +25,8 @@ var closed = true
 
 
 
-onready var spawn_zombie_timer = Timer.new()
-export(float) var spawn_zombie_wait_time = 2
+@onready var spawn_zombie_timer = Timer.new()
+@export var spawn_zombie_wait_time: float = 2
 
 # for now (item IDs):
 # 60 % chance no spawn = 0
@@ -47,7 +47,7 @@ func _ready():
 	spawn_zombie_timer.set_wait_time(spawn_zombie_wait_time)
 	spawn_zombie_timer.set_one_shot(true)
 	add_child(spawn_zombie_timer)
-	spawn_zombie_timer.connect("timeout", self, "spawn_zombie")
+	spawn_zombie_timer.connect("timeout", Callable(self, "spawn_zombie"))
 	
 	var rand = rng.randf() * 100.0
 	if rand > 90:
@@ -71,18 +71,19 @@ func toggle_open():
 			var flip_y = cemetery.tile_map.get_flip_y(global_transform)
 			var transpose = cemetery.tile_map.get_transposed(global_transform)
 			
-			cemetery.tile_map.set_cell(map_pos.x, map_pos.y, main.CASKET_ID, flip_x, flip_y, transpose)
+			cemetery.tile_map.set_cell(1, map_pos, main.CASKET_ID)
+			#cemetery.tile_map.set_cell(map_pos.x, map_pos.y, main.CASKET_ID, flip_x, flip_y, transpose)
 			
 			if item_id != 0:
 				var drop
 				
 				match item_id:
 					1:
-						drop = GOLD.instance()
+						drop = GOLD.instantiate()
 					2:
-						drop = GUN.instance()
+						drop = GUN.instantiate()
 					
-				drop.transform.origin = cemetery.tile_map.map_to_world(get_spawn_coords())
+				drop.transform.origin = cemetery.tile_map.map_to_local(get_spawn_coords())
 				game_world.add_game_object(drop)
 	else:
 		closed = true
@@ -90,9 +91,9 @@ func toggle_open():
 
 
 func spawn_zombie():
-	var zombie = ZOMBIE.instance()
+	var zombie = ZOMBIE.instantiate()
 	zombie.create(cemetery)
-	zombie.transform.origin = cemetery.tile_map.map_to_world(get_spawn_coords())
+	zombie.transform.origin = cemetery.tile_map.map_to_local(get_spawn_coords())
 	
 	#zombie.NAV
 	

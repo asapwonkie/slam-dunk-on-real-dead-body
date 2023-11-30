@@ -19,8 +19,8 @@ const PLAYER_Z_INDEX = 0
 const GAMEWORLD = preload("res://scenes/GameWorld.tscn")
 const GUN = preload("res://game_objects/Gun.tscn")
 
-onready var gui = main.get_child_of_type(GUI)
-onready var player = game_world.get_child_of_type(Player)
+@onready var gui = main.get_child_of_type(GUI)
+@onready var player = game_world.get_child_of_type(Player)
 #onready var console = gui.get_child_of_type(Console)
 #onready var fps_label = gui.get_child_of_name("FPSLabel")
 
@@ -29,16 +29,16 @@ var _draw_zombie_paths = false
 
 func _ready():
 	set_process(false)
-	gui.console.add_command("showfps", funcref(self, "set_showfps"), 1, [funcref(self, "get_showfps")])
-	gui.console.add_command("timescale", funcref(self, "set_timescale"), 1, [funcref(self, "get_timescale")])
-	gui.console.add_command("draw_zombie_paths", funcref(self, "set_draw_zombie_paths"), 1, [funcref(self, "get_draw_zombie_paths")])
-	gui.console.add_command("give_gun", funcref(self, "give_gun"), 0)
-	gui.console.add_command("invincible", funcref(self, "set_invincible"), 1, [funcref(self, "get_invincible")])
+	gui.console.add_command("showfps", Callable(self, "set_showfps"), 1, [Callable(self, "get_showfps")])
+	gui.console.add_command("timescale", Callable(self, "set_timescale"), 1, [Callable(self, "get_timescale")])
+	gui.console.add_command("draw_zombie_paths", Callable(self, "set_draw_zombie_paths"), 1, [Callable(self, "get_draw_zombie_paths")])
+	gui.console.add_command("give_gun", Callable(self, "give_gun"), 0)
+	gui.console.add_command("invincible", Callable(self, "set_invincible"), 1, [Callable(self, "get_invincible")])
 
 
 func _process(_delta):
 	if !is_instance_valid(game_world):
-		game_world = GAMEWORLD.instance()
+		game_world = GAMEWORLD.instantiate()
 		add_child(game_world)
 		player = game_world.get_node("Player")
 		set_process(false)
@@ -88,7 +88,7 @@ func get_draw_zombie_paths():
 
 func give_gun():
 	var player_inventory = player.get_child_of_type(Inventory)
-	var gun = GUN.instance()
+	var gun = GUN.instantiate()
 	
 	if player_inventory.primary == null:
 		player_inventory.set_primary(gun)

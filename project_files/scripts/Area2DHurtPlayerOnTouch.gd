@@ -15,11 +15,11 @@ extends Component
 
 
 
-export(int) var damage_on_hit = 1
+@export var damage_on_hit: int = 1
 
 
 
-onready var area2D = get_parent()
+@onready var area2D = get_parent()
 
 
 

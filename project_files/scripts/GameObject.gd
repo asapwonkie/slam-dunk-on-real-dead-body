@@ -5,15 +5,23 @@ extends Node2D
 
 
 
-export(String) var go_type = ""
+@export var go_type: String = ""
 
 
 
 # maybe needed if world is deleted and recreated
 #func get_world():
 #	return get_node("/root/Main/World")
-onready var main = get_node("/root/Main")
-onready var game_world = get_node("/root/Main/GameWorld")
+#@onready var main = get_node("/root/Main")
+#@onready var game_world = get_node("/root/Main/GameWorld")
+var main = null
+var game_world = null
+
+
+
+func _enter_tree():
+	main = get_node("/root/Main")
+	game_world = get_node("/root/Main/GameWorld")
 
 
 
@@ -29,9 +37,9 @@ func has_child_of_type(child_class):
 	var queue = Array()
 	queue.push_back(self)
 	
-	while !queue.empty():
+	while !queue.is_empty():
 		var node = queue.pop_front()
-		if node is child_class:
+		if is_instance_of(node,child_class):
 			return true
 		for child in node.get_children():
 			queue.push_back(child)
@@ -44,9 +52,9 @@ func get_child_of_type(child_class):
 	var queue = Array()
 	queue.push_back(self)
 	
-	while !queue.empty():
+	while !queue.is_empty():
 		var node = queue.pop_front()
-		if node is child_class:
+		if is_instance_of(node, child_class):
 			return node
 		for child in node.get_children():
 			queue.push_back(child)
@@ -61,9 +69,9 @@ func get_children_of_type(child_class):
 	var queue = Array()
 	queue.push_back(self)
 	
-	while !queue.empty():
+	while !queue.is_empty():
 		var node = queue.pop_front()
-		if node is child_class:
+		if is_instance_of(node, child_class):
 			children_of_type.push_back(node)
 		for child in node.get_children():
 			queue.push_back(child)
@@ -79,7 +87,7 @@ func has_child_of_name(child_name):
 	var queue = Array()
 	queue.push_back(self)
 	
-	while !queue.empty():
+	while !queue.is_empty():
 		var node = queue.pop_front()
 		if node.name == child_name:
 			return true
@@ -94,7 +102,7 @@ func get_child_of_name(child_name):
 	var queue = Array()
 	queue.push_back(self)
 	
-	while !queue.empty():
+	while !queue.is_empty():
 		var node = queue.pop_front()
 		if node.name == child_name:
 			return node

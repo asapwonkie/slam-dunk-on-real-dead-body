@@ -11,15 +11,15 @@ extends Component
 var primary = null
 var secondary = null
 
-export(NodePath) var primary_node_path = "" setget set_primary_node_path
-export(NodePath) var secondary_node_path = "" setget set_secondary_node_path
+@export var primary_node_path: NodePath = "": set = set_primary_node_path
+@export var secondary_node_path: NodePath = "": set = set_secondary_node_path
 
 
 
-onready var pickup_area = game_object.get_child_of_name("PickUpArea")
-onready var primary_position = game_object.get_child_of_name("PrimaryPosition")
-onready var secondary_position = game_object.get_child_of_name("SecondaryPosition")
-onready var character_controller = game_object.get_child_of_type(CharacterController)
+@onready var pickup_area = game_object.get_child_of_name("PickUpArea")
+@onready var primary_position = game_object.get_child_of_name("PrimaryPosition")
+@onready var secondary_position = game_object.get_child_of_name("SecondaryPosition")
+@onready var character_controller = game_object.get_child_of_type(CharacterController)
 
 
 
@@ -38,9 +38,9 @@ func set_secondary_node_path(path):
 
 
 func _ready():
-	if primary_node_path != "":
+	if !primary_node_path.is_empty():
 		set_primary(get_node(primary_node_path))
-	if secondary_node_path != "":
+	if !secondary_node_path.is_empty():
 		set_secondary(get_node(secondary_node_path))
 
 
@@ -57,7 +57,7 @@ func set_primary(go_primary):
 		
 		var rigid_body = primary.get_child_of_type(RigidBody2D)
 		if rigid_body != null:
-			rigid_body.mode = RigidBody2D.MODE_STATIC
+			rigid_body.freeze = true
 			rigid_body.transform = Transform2D(0, Vector2.ZERO)
 		
 		if go_primary.is_inside_tree():
@@ -78,7 +78,7 @@ func set_secondary(go_secondary):
 		
 		var rigid_body = primary.get_child_of_type(RigidBody2D)
 		if rigid_body != null:
-			rigid_body.mode = RigidBody2D.MODE_STATIC
+			rigid_body.freeze = true
 			rigid_body.global_transform = primary.global_transform
 		
 		if go_secondary.is_inside_tree():
@@ -136,7 +136,7 @@ func drop_primary():
 #		primary.set_collisions(true)
 		var rigid_body = primary.get_child_of_type(RigidBody2D)
 		if rigid_body != null:
-			rigid_body.mode = RigidBody2D.MODE_RIGID
-			rigid_body.apply_impulse(Vector2(1, 0), character_controller.velocity * 4 + character_controller.facing_direction * 1000)
+			rigid_body.freeze = false
+			rigid_body.apply_impulse(character_controller.velocity * 4 + character_controller.facing_direction * 1000, Vector2(1, 0))
 		
 		set_primary(null)

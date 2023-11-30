@@ -3,8 +3,8 @@ extends Component
 
 
 
-export(int) var health = 3
-export(bool) var invincible = false
+@export var health: int = 3
+@export var invincible: bool = false
 
 
 

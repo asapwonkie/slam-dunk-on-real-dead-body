@@ -4,8 +4,8 @@ extends GameObject
 
 
 
-onready var output_field = get_child_of_name("OutputField")
-onready var input_field = get_child_of_name("InputField")
+@onready var output_field = get_child_of_name("OutputField")
+@onready var input_field = get_child_of_name("InputField")
 
 
 
@@ -13,7 +13,7 @@ class Command:
 	var func_name = ""
 	var func_ref = null
 	var num_args = 0
-	var get_arg_funcs = null
+	var get_arg_funcs = null # getter function
 	
 	func create(_func_name, _func_ref, _num_args = 0, _get_arg_funcs = null):
 		func_name = _func_name
@@ -47,13 +47,13 @@ var command_index = 0
 
 func _ready():
 	commands_list["help"] = Command.new()
-	commands_list["help"].create("help", funcref(self, "help"), 0)
+	commands_list["help"].create("help", Callable(self, "help"), 0)
 	
 	commands_list["quit"] = Command.new()
-	commands_list["quit"].create("quit", funcref(main, "quit"), 0)
+	commands_list["quit"].create("quit", Callable(main, "quit"), 0)
 	
 	commands_list["restart"] = Command.new()
-	commands_list["restart"].create("restart", funcref(main, "restart"), 0)
+	commands_list["restart"].create("restart", Callable(main, "restart"), 0)
 	
 	output_field.clear()
 
@@ -66,26 +66,26 @@ func add_command(func_name, func_ref, num_args = 0, get_arg_funcs = null):
 
 func _input(event):
 	if event.is_action_pressed("OpenConsole"):
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 		toggle_console()
 	elif open and event.is_action_pressed("Enter"):
 		enter_command(input_field.text)
 		command_index = entered_commands.size()
 	elif event.is_action_pressed("PreviousCommand"):
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 		if command_index > 0:
 			command_index -= 1
 			input_field.text = entered_commands[command_index]
-			input_field.caret_position = input_field.text.length()
+			input_field.caret_column = input_field.text.length()
 	elif event.is_action_pressed("NextCommand"):
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 		if command_index < entered_commands.size():
 			command_index += 1
 			if command_index == entered_commands.size():
 				input_field.text = ""
 			else:
 				input_field.text = entered_commands[command_index]
-				input_field.caret_position = input_field.text.length()
+				input_field.caret_column = input_field.text.length()
 	elif event.is_action_pressed("Tab") and input_field.text != "":
 		var keys = commands_list.keys()
 		var matches = [ ]
@@ -117,7 +117,7 @@ func _input(event):
 				text = longest_match.substr(0, least_common_index)
 				
 			input_field.text = text
-			input_field.caret_position = input_field.text.length()
+			input_field.caret_column = input_field.text.length()
 
 
 func toggle_console():
@@ -125,12 +125,12 @@ func toggle_console():
 		get_tree().paused = false
 		open = false
 		visible = false
-		input_field.pause_mode = Node.PAUSE_MODE_STOP
+		input_field.process_mode = Node.PROCESS_MODE_PAUSABLE
 	else:
 		get_tree().paused = true
 		open = true
 		visible = true
-		input_field.pause_mode = Node.PAUSE_MODE_PROCESS
+		input_field.process_mode = Node.PROCESS_MODE_ALWAYS
 		input_field.grab_focus()
 
 

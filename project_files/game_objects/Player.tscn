@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scripts/Health.gd" type="Script" id=1]
-[ext_resource path="res://concept_art/player/player.png" type="Texture" id=2]
+[ext_resource path="res://concept_art/player/player.png" type="Texture2D" id=2]
 [ext_resource path="res://animations/idleleftshovelswing.anim" type="Animation" id=3]
 [ext_resource path="res://scripts/CharacterController.gd" type="Script" id=4]
 [ext_resource path="res://scripts/PlayerInput.gd" type="Script" id=5]
@@ -19,20 +19,20 @@
 [ext_resource path="res://animations/idleleftshovel.anim" type="Animation" id=17]
 [ext_resource path="res://animations/idleleft.anim" type="Animation" id=18]
 [ext_resource path="res://scripts/CharacterAnimation.gd" type="Script" id=19]
-[ext_resource path="res://concept_art/zombie.png" type="Texture" id=20]
+[ext_resource path="res://concept_art/zombie.png" type="Texture2D" id=20]
 [ext_resource path="res://game_objects/Shovel.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.489, 2.583 )
+size = Vector2( 4.489, 2.583 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8.397, 16.998 )
+size = Vector2( 8.397, 16.998 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 11.85, 17.886 )
+size = Vector2( 11.85, 17.886 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 11.183, 12.583 )
+size = Vector2( 11.183, 12.583 )
 
 [sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
@@ -62,35 +62,35 @@ shader_param/final_sundown_time = null
 shader_param/final_circle_time = null
 shader_param/current_time = null
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource( 6 )
 
 [node name="BarrierCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="Skeleton" type="Node2D" parent="."]
+[node name="Skeleton3D" type="Node2D" parent="."]
 position = Vector2( 0, -11.295 )
 
-[node name="Torso" type="Sprite" parent="Skeleton"]
+[node name="Torso" type="Sprite2D" parent="Skeleton3D"]
 position = Vector2( 0, -8.042 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 2, 13, 9, 15 )
 
-[node name="Hip" type="Sprite" parent="Skeleton"]
+[node name="Hip" type="Sprite2D" parent="Skeleton3D"]
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 13, 13, 9, 3 )
 
-[node name="Head" type="Sprite" parent="Skeleton"]
+[node name="Head" type="Sprite2D" parent="Skeleton3D"]
 position = Vector2( 0, -18.36 )
 texture = ExtResource( 2 )
 flip_h = true
 region_enabled = true
 region_rect = Rect2( 2, 2, 17, 9 )
 
-[node name="ArmRight" type="Sprite" parent="Skeleton"]
+[node name="ArmRight" type="Sprite2D" parent="Skeleton3D"]
 position = Vector2( -3.974, -9.842 )
 rotation = -1.3282
 z_index = 2
@@ -99,7 +99,7 @@ offset = Vector2( -5, 0 )
 region_enabled = true
 region_rect = Rect2( 13, 18, 10, 1 )
 
-[node name="ArmLeft" type="Sprite" parent="Skeleton"]
+[node name="ArmLeft" type="Sprite2D" parent="Skeleton3D"]
 position = Vector2( 3.932, -9.842 )
 rotation = 1.3282
 z_index = 2
@@ -108,21 +108,21 @@ offset = Vector2( 5, 0 )
 region_enabled = true
 region_rect = Rect2( 13, 18, 10, 1 )
 
-[node name="LegRight" type="Sprite" parent="Skeleton"]
+[node name="LegRight" type="Sprite2D" parent="Skeleton3D"]
 position = Vector2( -2.444, 1.148 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, 5 )
 region_enabled = true
 region_rect = Rect2( 13, 21, 1, 10 )
 
-[node name="LegLeft" type="Sprite" parent="Skeleton"]
+[node name="LegLeft" type="Sprite2D" parent="Skeleton3D"]
 position = Vector2( 2.131, 1.148 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, 5 )
 region_enabled = true
 region_rect = Rect2( 13, 21, 1, 10 )
 
-[node name="PrimaryPosition" type="Position2D" parent="Skeleton"]
+[node name="PrimaryPosition" type="Marker2D" parent="Skeleton3D"]
 position = Vector2( 0, -0.807 )
 rotation = 2.38237
 z_index = 2
@@ -130,9 +130,9 @@ __meta__ = {
 "_gizmo_extents_": 3.0
 }
 
-[node name="Shovel" parent="Skeleton/PrimaryPosition" instance=ExtResource( 21 )]
+[node name="Shovel" parent="Skeleton3D/PrimaryPosition" instance=ExtResource( 21 )]
 
-[node name="SecondaryPosition" type="Position2D" parent="Skeleton"]
+[node name="SecondaryPosition" type="Marker2D" parent="Skeleton3D"]
 position = Vector2( 0, -11.027 )
 rotation = -2.35619
 z_index = -2
@@ -140,11 +140,11 @@ __meta__ = {
 "_gizmo_extents_": 3.0
 }
 
-[node name="HeadPosition" type="Position2D" parent="Skeleton"]
+[node name="HeadPosition" type="Marker2D" parent="Skeleton3D"]
 visible = false
 position = Vector2( 0, -5.251 )
 
-[node name="FootPosition" type="Position2D" parent="Skeleton"]
+[node name="FootPosition" type="Marker2D" parent="Skeleton3D"]
 visible = false
 position = Vector2( 0, 27.528 )
 
@@ -194,11 +194,11 @@ script = ExtResource( 5 )
 
 [node name="CharacterController" type="Node" parent="."]
 script = ExtResource( 4 )
-aim_position_path = NodePath("../Skeleton/PrimaryPosition")
+aim_position_path = NodePath("../Skeleton3D/PrimaryPosition")
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource( 9 )
-primary_node_path = NodePath("../Skeleton/PrimaryPosition/Shovel")
+primary_node_path = NodePath("../Skeleton3D/PrimaryPosition/Shovel")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
@@ -218,7 +218,7 @@ anims/idleupshovel = ExtResource( 7 )
 [node name="CharacterAnimation" type="Node" parent="."]
 script = ExtResource( 19 )
 
-[node name="Sundown" type="Sprite" parent="."]
+[node name="Sundown" type="Sprite2D" parent="."]
 material = SubResource( 6 )
 scale = Vector2( 32, 19 )
 z_index = 10

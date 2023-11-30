@@ -6,11 +6,11 @@ extends GameObject
 
 var cemetery
 
-onready var player = get_node("/root/Main/GameWorld/Player")
-onready var character_controller = get_child_of_type(CharacterController)
-onready var hitbox = $Hitbox
-onready var health = $Health
-onready var inventory = $Inventory
+@onready var player = get_node("/root/Main/GameWorld/Player")
+@onready var character_controller = get_child_of_type(CharacterController)
+@onready var hitbox = $Hitbox
+@onready var health = $Health
+@onready var inventory = $Inventory
 
 var speed_curve = LogisticCurve.new()
 
@@ -63,9 +63,9 @@ func _process(delta):
 	var go
 	for area in overlapping_areas:
 		go = get_game_object(area)
-		var health = go.get_child_of_type(Health)
-		if health != null:
-			health.hurt(1)
+		var overlapping_health = go.get_child_of_type(Health)
+		if overlapping_health != null:
+			overlapping_health.hurt(1)
 	
 	if health.health == 0:
 		queue_free()
@@ -74,7 +74,7 @@ func _process(delta):
 
 func can_see_player():
 	var space_state = get_world_2d().direct_space_state
-	var result_head = space_state.intersect_ray(global_position, player.head_position.global_position, [], main.BARRIER_LAYER)
-	var result_mid = space_state.intersect_ray(global_position, player.global_position, [], main.BARRIER_LAYER)
-	var result_foot = space_state.intersect_ray(global_position, player.foot_position.global_position, [], main.BARRIER_LAYER)
-	return result_head.empty() or result_mid.empty() or result_foot.empty()
+	var query_head = PhysicsRayQueryParameters2D.create(global_position, player.head_position.global_position, main.BARRIER_LAYER)
+	var query_mid = PhysicsRayQueryParameters2D.create(global_position, player.global_position, main.BARRIER_LAYER)
+	var query_foot = PhysicsRayQueryParameters2D.create(global_position, player.foot_position.global_position, main.BARRIER_LAYER)
+	return space_state.intersect_ray(query_head).is_empty() or space_state.intersect_ray(query_mid).is_empty() or space_state.intersect_ray(query_foot).is_empty()
